@@ -37,6 +37,12 @@ public class Atendimento implements Serializable {
     @Enumerated(EnumType.STRING)
     private EStatus status;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EAtendimento tipoDeAtendimento;
+
+    private Long idPai;
+
     public Long getId() {
         return id;
     }
@@ -83,6 +89,22 @@ public class Atendimento implements Serializable {
 
     public void setStatus(EStatus status) {
         this.status = status;
+    }
+
+    public EAtendimento getTipoDeAtendimento() {
+        return tipoDeAtendimento;
+    }
+
+    public void setTipoDeAtendimento(EAtendimento tipoDeAtendimento) {
+        this.tipoDeAtendimento = tipoDeAtendimento;
+    }
+
+    public Long getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Long idPai) {
+        this.idPai = idPai;
     }
     
 }
