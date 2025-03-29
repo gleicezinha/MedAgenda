@@ -13,6 +13,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             """)
     List<Usuario> busca(String termoBusca);
 
-
+    @Query("SELECT u from Usuario u " +
+            "WHERE :cpf = u.cpf")
+    Usuario buscaPorCpf(String cpf);
     
 }
