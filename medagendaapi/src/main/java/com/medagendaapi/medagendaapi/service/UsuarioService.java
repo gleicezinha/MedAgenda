@@ -22,8 +22,8 @@ public class UsuarioService implements ICrudService<Usuario>  {
 
     @Override
     public Usuario get(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        Usuario registro = repo.findById(id).orElse(null);
+        return registro;
     }
 
     @Override
@@ -34,8 +34,12 @@ public class UsuarioService implements ICrudService<Usuario>  {
 
     @Override
     public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repo.deleteById(id);
+    }
+
+    public Usuario buscaPorCpf(String cpf){
+        Usuario registro = repo.buscaPorCpf(cpf);
+        return registro;
     }
     
 }
