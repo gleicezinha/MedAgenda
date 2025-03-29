@@ -9,7 +9,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
     @Query(
         "SELECT m from Medico m " +
-        "WHERE m.nomeCompleto LIKE %:termoBusca% "
+        "WHERE (:termoBusca IS NULL OR m.nomeCompleto LIKE %:termoBusca%) "
     )
     List<Medico> busca(String termoBusca);
 
