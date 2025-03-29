@@ -17,7 +17,7 @@ public class Usuario implements Serializable{
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nomeUsuario;
 
     private String senha;
@@ -28,7 +28,7 @@ public class Usuario implements Serializable{
     @Column(nullable = false)
     private String telefone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @Column(nullable = false)
@@ -37,46 +37,6 @@ public class Usuario implements Serializable{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EPapel papel;
-
-    private String cep;
-
-    private String endereco;
-
-    private String cidade;
-
-    private String estado;
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public Long getId() {
         return id;
