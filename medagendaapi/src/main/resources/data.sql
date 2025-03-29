@@ -1,3 +1,8 @@
+INSERT INTO usuario (nome_usuario, senha, email, telefone, cpf, ativo, papel)
+VALUES 
+('admin', 'senha123', 'admin@email.com', '(11) 99999-9999', '12345678900', true, 'ADMIN');
+
+
 INSERT INTO especialidade (id, nome)
 VALUES (1, 'Cardiologia');
 
@@ -21,8 +26,23 @@ INSERT INTO paciente (nome_completo, cpf, email, estado, endereco, bairro, cep, 
 VALUES 
 ('João da Silva', '12345678900', 'joao@email.com', 'SP', 'Rua das Flores, 123', 'Centro', '01010-000', '(11) 99999-9999', '(11) 98888-8888', '1985-06-15', 'O_POSITIVO', 'M');
 
-INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status)
+INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento)
 VALUES 
-('2024-04-05', '14:30:00', 1, 1, 'AGENDADO');
+('2024-04-05', '14:30:00', 1, 1, 'AGENDADO', NULL, 'EXAME');
+
+INSERT INTO prontuario 
+(atendimento_id, problema_relatado, descricao, prescricao, 
+ tem_alergia, qual_alergia, 
+ tem_remedio, qual_remedio, 
+ tem_doenca_cognitiva, qual_doenca_cognitiva) 
+VALUES 
+(1, 
+ 'Paciente relata dores no peito e falta de ar.', 
+ 'Exames iniciais indicam suspeita de angina.', 
+ 'Prescrito repouso e encaminhamento para exames complementares.', 
+ TRUE, 'Poeira, Pólen', 
+ TRUE, 'Aspirina, Losartana', 
+ FALSE, NULL);
+
 
 
