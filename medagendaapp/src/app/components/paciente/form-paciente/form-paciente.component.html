@@ -1,1 +1,61 @@
-<p>form-paciente works!</p>
+<!-- paciente-formulario.component.html -->
+<div class="container">
+    <h2>Formulário de Paciente</h2>
+    <form>
+      <label for="nome">Nome:</label>
+      <input id="nome" type="text" [(ngModel)]="registro.nome" name="nome" required>
+      
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input id="dataNascimento" type="date" [(ngModel)]="registro.dataNascimento" name="dataNascimento" required>
+      
+      <label for="cpf">CPF:</label>
+      <input id="cpf" type="text" [(ngModel)]="registro.cpf" name="cpf" required>
+      
+      <label for="contato">Contato:</label>
+      <input id="contato" type="tel" [(ngModel)]="registro.telefone" name="contato">
+      <label for="contato">Contato de Emergência :</label>
+      <input id="contato" type="tel" [(ngModel)]="registro.telefoneEmergencia" name="contato">
+      
+      <label for="email">E-mail:</label>
+      <input id="email" type="email" [(ngModel)]="registro.email" name="email">
+      
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" [(ngModel)]="registro.sexo" name="sexo">
+        <option value="Feminino">Feminino</option>
+        <option value="Masculino">Masculino</option>
+      </select>
+      
+      <label for="tipoSanguineo">Tipo Sanguíneo:</label>
+      <select id="tipoSanguineo" [(ngModel)]="registro.grupoSanguineo" name="tipoSanguineo">
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      
+      <label for="cep">CEP:</label>
+      <input id="cep" type="text" [(ngModel)]="registro.cep" name="cep">
+      
+      <label for="bairro">Bairro:</label>
+      <input id="bairro" type="text" [(ngModel)]="registro.bairro" name="bairro">
+      
+      <label for="endereco">Endereço:</label>
+      <input id="endereco" type="text" [(ngModel)]="registro.endereco" name="endereco">
+      
+      <!-- <label for="uf">UF:</label>
+      <select id="uf" [(ngModel)]="registro.uf" name="uf">
+        <option value="SP">SP</option>
+        <option value="RJ">RJ</option>
+        <option value="MG">MG</option>
+        <option value="ES">ES</option>
+        <option value="Outros">Outros</option>
+      </select> -->
+      
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="cancelar()">Cancelar</button>
+    </form>
+</div>

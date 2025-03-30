@@ -3,18 +3,31 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Prontuario } from '../models/prontuario.model';
+import { ICrudService } from './i-crud-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProntuarioService {
-
-  private apiUrl: string = environment.API_URL + '/prontuario';
-
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<Prontuario[]> {
-    return this.http.get<Prontuario[]>(`${this.apiUrl}/consultar/todos`);
+export class ProntuarioService implements ICrudService<Prontuario> {
+  constructor(
+    private http: HttpClient
+  ) { }
+    apiUrl: string = environment.API_URL + '/config/protuario';
+    
+  getPage(termoBusca?: string): Observable<Prontuario> {
+    let url = this.apiUrl + "/consultar?";
+    if (termoBusca) {
+      url += "termoBusca=" + termoBusca;
+    }
+    return this.http.get<Prontuario>(url);
+  }
+  
+  get(termoBusca?: string): Observable<Prontuario[]> {
+    let url = this.apiUrl + '/consultar/todos';
+    if (termoBusca) {
+      url += '?termoBusca=' + termoBusca;
+    }
+      return this.http.get<Prontuario[]>(url);
   }
 
   getById(id: number): Observable<Prontuario> {
