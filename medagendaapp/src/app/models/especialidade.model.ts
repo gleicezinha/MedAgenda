@@ -1,2 +1,4 @@
-export class Especialidade {
+export type Especialidade = {
+    id: number;
+    nome: string;
 }
