@@ -13,21 +13,38 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { MatCardModule } from '@angular/material/card'; 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; // Import the ResetPasswordComponent
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; 
 import { MatTableModule } from '@angular/material/table';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
 import { AtendimentoComponent } from './components/atendimento/atendimento.component';
+import { PacienteComponent} from './components/paciente/paciente.component'; 
+import { PacienteDetalhesComponent } from './components/paciente-detalhes/paciente-detalhes.component'; 
+import { PacienteFormComponent } from './components/paciente-form/paciente-form.component'; 
+import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
+import { AtendimentoFormComponent } from './components/atendimento-form/atendimento-form.component';
+import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
+import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
+import { ReactiveFormsModule } from '@angular/forms'; 
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    ProfissionalFormComponent,
     ProfissionaisComponent,
     AtendimentoComponent,
+    PacienteComponent,
+    PacienteDetalhesComponent,
+    AtendimentoFormComponent,
+    PacienteFormComponent, 
+    AtendenteFormComponent,
     ResetPasswordComponent,
-
+    EspecialidadeFormComponent,
+    CalendarioComponent,
     UsuarioComponent
   ],
   imports: [
@@ -35,6 +52,7 @@ import { AtendimentoComponent } from './components/atendimento/atendimento.compo
     BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,

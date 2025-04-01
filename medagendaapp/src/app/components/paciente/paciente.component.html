@@ -1,1 +1,28 @@
-<p>paciente works!</p>
+<div class="pacientes-container">
+  <h2 class="title">Todos os Pacientes</h2>
+
+  <div class="content">
+    <div class="left-panel">
+      <mat-form-field appearance="outline" class="search-field">
+        <button mat-icon-button matPrefix class="search-button">
+          <mat-icon>search</mat-icon>
+        </button>
+        <input matInput placeholder="Buscar Pacientes" />
+      </mat-form-field>
+      <div class="add-button-container">
+        <button mat-raised-button color="primary" class="add-button">
+          Cadastrar Paciente
+        </button>
+      </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="pacientes-list">
+            <div class="paciente-item" *ngFor="let paciente of pacientes; let i = index">
+                <span>{{ paciente.nome }}</span>
+                <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">ver prontuário</a>           
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
