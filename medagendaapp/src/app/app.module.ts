@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +27,7 @@ import { AtendenteFormComponent } from './components/atendente-form/atendente-fo
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { FullCalendarModule } from '@fullcalendar/angular'; 
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -63,6 +65,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTableModule
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

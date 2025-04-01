@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
 @Component({
   selector: 'app-calendario',
@@ -7,45 +10,45 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendario.component.scss'],
 })
 export class CalendarioComponent implements OnInit {
-  dias: { numero: number; paciente?: string; cor?: string }[] = [];
+  calendarOptions: any;
 
   ngOnInit(): void {
-    this.carregarDias();
+    this.carregarEventos();
   }
 
-  carregarDias(): void {
-    this.dias = [
-      { numero: 1, paciente: 'Maria Eliane', cor: 'green' },
-      { numero: 2 },
-      { numero: 3 },
-      { numero: 4 },
-      { numero: 5 },
-      { numero: 6 },
-      { numero: 7 },
-      { numero: 8 },
-      { numero: 9 },
-      { numero: 10 },
-      { numero: 11 },
-      { numero: 12 },
-      { numero: 13 },
-      { numero: 14 },
-      { numero: 15 },
-      { numero: 16 },
-      { numero: 17, paciente: 'João', cor: 'red' },
-      { numero: 18 },
-      { numero: 19 },
-      { numero: 20 },
-      { numero: 21 },
-      { numero: 22 },
-      { numero: 23 },
-      { numero: 24 },
-      { numero: 25 },
-      { numero: 26 },
-      { numero: 27 },
-      { numero: 28 },
-      { numero: 29 },
-      { numero: 30 },
-      { numero: 31 },
+  carregarEventos(): void {
+    const eventos = [
+      {
+        title: 'Maria Eliane',
+        start: '2025-01-01',
+        color: 'green',
+      },
+      {
+        title: 'João',
+        start: '2025-01-17',
+        color: 'red',
+      },
     ];
+
+    this.calendarOptions = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay',
+      },
+      events: eventos, 
+      dateClick: this.onDateClick.bind(this),
+      eventClick: this.onEventClick.bind(this),
+    };
+  }
+
+  onDateClick(event: any): void {
+    alert(`Data selecionada: ${event.dateStr}`);
+  }
+
+  onEventClick(event: any): void {
+    alert(`Paciente: ${event.event.title}`);
   }
 }

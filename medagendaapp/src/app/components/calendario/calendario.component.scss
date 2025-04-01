@@ -8,54 +8,24 @@
     margin-bottom: 20px;
   }
 
-  .calendario {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  ::ng-deep .fc {
+    font-family: Arial, sans-serif;
+  }
 
-    .mes {
-      margin-bottom: 20px;
+  ::ng-deep .fc-toolbar-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
 
-      h2 {
-        font-size: 20px;
-        font-weight: bold;
-      }
-    }
+  ::ng-deep .fc-daygrid-day {
+    text-align: center;
+  }
 
-    .dias {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-
-      .dia {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        text-align: center;
-        height: 80px;
-
-        &.agendado {
-          border: 2px solid #000;
-        }
-
-        .numero {
-          font-size: 16px;
-          font-weight: bold;
-        }
-
-        .paciente {
-          margin-top: 5px;
-          padding: 5px;
-          font-size: 14px;
-          font-weight: bold;
-          color: white;
-          border-radius: 4px;
-        }
-      }
-    }
+  ::ng-deep .fc-event {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 5px;
   }
 }

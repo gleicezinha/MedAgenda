@@ -1,17 +1,5 @@
 <div class="calendario-container">
   <h1 class="titulo">Agendados</h1>
 
-  <div class="calendario">
-    <div class="mes">
-      <h2>Janeiro</h2>
-    </div>
-    <div class="dias">
-      <div *ngFor="let dia of dias" class="dia" [ngClass]="{'agendado': dia.paciente}">
-        <span class="numero">{{ dia.numero }}</span>
-        <span class="paciente" *ngIf="dia.paciente" [ngStyle]="{'background-color': dia.cor}">
-          {{ dia.paciente }}
-        </span>
-      </div>
-    </div>
-  </div>
+  <full-calendar [options]="calendarOptions"></full-calendar>
 </div>
