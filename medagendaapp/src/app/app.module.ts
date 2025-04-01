@@ -14,13 +14,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; // Import the ResetPasswordComponent
+import { MatTableModule } from '@angular/material/table';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
+import { AtendimentoComponent } from './components/atendimento/atendimento.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ProfissionaisComponent,
+    AtendimentoComponent,
+    ResetPasswordComponent,
+
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     AppRoutingModule,
     MatToolbarModule,
     FormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

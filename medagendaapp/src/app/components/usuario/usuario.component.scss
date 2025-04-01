@@ -1,0 +1,70 @@
+.usuario-container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.search-field {
+  width: 100%;
+  max-width: 400px;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .search-icon {
+    color: #B0B0B0 !important; 
+    margin-right: 8px; 
+  }
+}
+
+button mat-icon {
+  color: #000000 !important; 
+}
+
+button[color="primary"] mat-icon {
+  color: #1565C0 !important; 
+}
+
+button[color="warn"] mat-icon {
+  color: #d32f2f !important; 
+}
+.search-field {
+  width: 300px;
+}
+
+.add-button {
+  background-color: #4caf50 !important;
+  color: #ffffff !important;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #333333; 
+}
+
+th, td {
+  border: 1px solid #333333; 
+  padding: 10px;
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
+}
+
+button {
+  margin-right: 5px;
+}
