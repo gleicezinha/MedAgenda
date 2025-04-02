@@ -17,7 +17,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { MatTableModule } from '@angular/material/table';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
-import { AtendimentoComponent } from './components/atendimento/atendimento.component';
+import { AtendimentoComponent } from './components/atendimento/atendimento.component'; 
 import { PacienteComponent} from './components/paciente/paciente.component'; 
 import { PacienteDetalhesComponent } from './components/paciente-detalhes/paciente-detalhes.component'; 
 import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
@@ -28,7 +28,6 @@ import { EspecialidadeFormComponent } from './components/especialidade-form/espe
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -63,8 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MatToolbarModule,
     FormsModule,
-    MatTableModule,
-    HttpClientModule
+    MatTableModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
