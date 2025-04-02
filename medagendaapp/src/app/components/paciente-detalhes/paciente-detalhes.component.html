@@ -1,0 +1,72 @@
+<div class="paciente-detalhes-container">
+  <h1 class="titulo">Paciente: {{ paciente.nome }}</h1>
+
+  <div class="conteudo">
+    <div class="esquerda">
+      <div class="detalhes-grid">
+        <div class="campo">
+          <label>Data de Nascimento:</label>
+          <span>{{ paciente.dataNascimento }}</span>
+        </div>
+        <div class="campo">
+          <label>CPF:</label>
+          <span>{{ paciente.cpf }}</span>
+        </div>
+        <div class="campo">
+          <label>Contato:</label>
+          <span>{{ paciente.contato }}</span>
+        </div>
+        <div class="campo">
+          <label>Contato de Emergência:</label>
+          <span>(00) 00000-0000</span>
+        </div>
+        <div class="campo">
+          <label>E-mail:</label>
+          <span>{{ paciente.email }}</span>
+        </div>
+        <div class="campo">
+          <label>Sexo:</label>
+          <span>{{ paciente.sexo }}</span>
+        </div>
+        <div class="campo">
+          <label>Tipo Sanguíneo:</label>
+          <span>{{ paciente.tipoSanguineo }}</span>
+        </div>
+        <div class="campo">
+          <label>CEP:</label>
+          <span>00000-000</span>
+        </div>
+        <div class="campo">
+          <label>Bairro:</label>
+          <span>Júpiter</span>
+        </div>
+        <div class="campo">
+          <label>Endereço:</label>
+          <span>{{ paciente.endereco }}</span>
+        </div>
+        <div class="campo">
+          <label>UF:</label>
+          <span>SP</span>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button mat-raised-button class="btn-prontuario">Prontuário</button>
+        <button mat-raised-button class="btn-atestado">Atestado</button>
+        <button mat-raised-button class="btn-exame">Pedir Exame</button>
+        <button mat-raised-button class="btn-pericia">Perícia</button>
+      </div>
+    </div>
+
+    <div class="direita">
+      <div class="consultas">
+        <h3>Consultas</h3>
+        <ul>
+          <li *ngFor="let consulta of paciente.consultas">
+            <span>{{ consulta }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

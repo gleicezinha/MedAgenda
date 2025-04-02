@@ -1,0 +1,49 @@
+<div class="atendimento-form-container">
+  <h1 class="titulo">Formulário de Atendimento</h1>
+
+  <form [formGroup]="atendimentoForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="dataAtendimento">Dia do Atendimento:</label>
+        <input id="dataAtendimento" formControlName="dataAtendimento" type="date" />
+      </div>
+      <div class="campo">
+        <label for="horarioAtendimento">Horário do Atendimento:</label>
+        <input id="horarioAtendimento" formControlName="horarioAtendimento" type="time" />
+      </div>
+      <div class="campo">
+        <label for="tipoAtendimento">Tipo de Atendimento:</label>
+        <select id="tipoAtendimento" formControlName="tipoAtendimento">
+          <option value="Consulta">Consulta</option>
+          <option value="Exame">Exame</option>
+          <option value="Retorno">Retorno</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="atendente">Atendente:</label>
+        <input id="atendente" formControlName="atendente" type="text" />
+      </div>
+        <div class="campo">
+            <label for="especialidade">Especialidade:</label>
+            <select id="especialidade" formControlName="especialidade">
+            <option *ngFor="let especialidade of especialidades" [value]="especialidade">
+                {{ especialidade }}
+            </option>
+            </select>
+        </div>
+      <div class="campo">
+        <label for="profissional">Profissional:</label>
+        <input id="profissional" formControlName="profissional" type="text" />
+      </div>
+      <div class="campo">
+        <label for="paciente">Paciente:</label>
+        <input id="paciente" formControlName="paciente" type="text" />
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<div class="especialidade-form-container">
+  <h1 class="titulo">Formulário de Especialidade</h1>
+
+  <form [formGroup]="especialidadeForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="nome">Nome:</label>
+        <input id="nome" formControlName="nome" type="text" />
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
