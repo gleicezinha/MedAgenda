@@ -9,15 +9,15 @@ import com.medagendaapi.medagendaapi.model.Usuario;
 import com.medagendaapi.medagendaapi.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService implements ICrudService<Usuario>  {
+public class UsuarioService implements ICrudService<Usuario> {
 
     @Autowired
     private UsuarioRepository repo;
 
     @Override
     public List<Usuario> get(String termoBusca) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        List<Usuario> registros = repo.busca(termoBusca);
+        return registros;
     }
 
     @Override
@@ -37,9 +37,9 @@ public class UsuarioService implements ICrudService<Usuario>  {
         repo.deleteById(id);
     }
 
-    public Usuario buscaPorCpf(String cpf){
+    public Usuario buscaPorCpf(String cpf) {
         Usuario registro = repo.buscaPorCpf(cpf);
         return registro;
     }
-    
+
 }
