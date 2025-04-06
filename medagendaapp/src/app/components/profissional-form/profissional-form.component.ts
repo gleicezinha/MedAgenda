@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MedicoService } from '../../services/medico.service';
+import { Medico } from '../../models/medico.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profissional-form',
   standalone: false,
   templateUrl: './profissional-form.component.html',
-  styleUrls: ['./profissional-form.component.scss'],
+  styleUrls: ['./profissional-form.component.scss']
 })
 export class ProfissionalFormComponent implements OnInit {
   profissionalForm!: FormGroup;
-
   ufs = [
     { sigla: 'AC', nome: 'Acre' },
     { sigla: 'AL', nome: 'Alagoas' },
@@ -37,31 +39,38 @@ export class ProfissionalFormComponent implements OnInit {
     { sigla: 'SC', nome: 'Santa Catarina' },
     { sigla: 'SP', nome: 'São Paulo' },
     { sigla: 'SE', nome: 'Sergipe' },
-    { sigla: 'TO', nome: 'Tocantins' },
+    { sigla: 'TO', nome: 'Tocantins' }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private medicoService: MedicoService) {}
 
   ngOnInit(): void {
     this.profissionalForm = this.fb.group({
       nome: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
-      especialidade: ['', Validators.required],
-      contato: ['', Validators.required],
-      registroConselho: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      cep: ['', Validators.required],
-      bairro: ['', Validators.required],
-      endereco: ['', Validators.required],
-      uf: ['', Validators.required],
+      cpf: [''],
+      especialidade: [''],
+      contato: [''],
+      registroConselho: [''],
+      email: ['', [Validators.email]],
+      cep: [''],
+      bairro: [''],
+      uf: [''],
+      endereco: ['']
     });
   }
 
   onSubmit(): void {
     if (this.profissionalForm.valid) {
-      console.log('Profissional cadastrado:', this.profissionalForm.value);
-    } else {
-      console.log('Formulário inválido');
+      const profissional: Medico = this.profissionalForm.value;
+      this.medicoService.save(profissional).subscribe({
+        next: () => {
+          console.log('Profissional salvo com sucesso!');
+          this.profissionalForm.reset();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Erro ao salvar profissional:', err.message);
+        }
+      });
     }
   }
 
