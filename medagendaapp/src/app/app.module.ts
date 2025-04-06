@@ -28,6 +28,7 @@ import { EspecialidadeFormComponent } from './components/especialidade-form/espe
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AppRoutingModule,
     MatToolbarModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], 
