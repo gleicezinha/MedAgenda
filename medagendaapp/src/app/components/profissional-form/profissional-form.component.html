@@ -1,7 +1,6 @@
-
 <div class="profissional-form-container">
   <h1 class="titulo">Formulário de Profissional</h1>
-  <form [formGroup]="profissionalForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="profissionalForm" (ngSubmit)="save()">
     <div class="form-grid">
       <div class="campo">
         <label for="nome">Nome:</label>
@@ -48,7 +47,7 @@
     </div>
     <div class="botoes">
       <button type="submit" class="btn-salvar">Salvar</button>
-      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
-    </div>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
+    </div>    
   </form>
 </div>

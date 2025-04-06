@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicoService } from '../../services/medico.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Medico } from '../../models/medico.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -41,8 +43,14 @@ export class ProfissionalFormComponent implements OnInit {
     { sigla: 'SE', nome: 'Sergipe' },
     { sigla: 'TO', nome: 'Tocantins' }
   ];
+  idEditando: number | null = null;
 
-  constructor(private fb: FormBuilder, private medicoService: MedicoService) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private medicoService: MedicoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.profissionalForm = this.fb.group({
@@ -57,15 +65,37 @@ export class ProfissionalFormComponent implements OnInit {
       uf: [''],
       endereco: ['']
     });
+
+    const idParam = this.route.snapshot.queryParamMap.get('id');
+    if (idParam) {
+      this.idEditando = +idParam;
+      this.medicoService.getById(this.idEditando).subscribe((res: Medico) => {
+        this.profissionalForm.patchValue({
+          nome: res.nomeCompleto,
+          cpf: res.cpf,
+          especialidade: res.especialidade.nome,
+          contato: res.telefone,
+          registroConselho: res.registroConselho,
+          email: res.email,
+          cep: res.cep,
+          bairro: res.bairro,
+          uf: res.estado,
+          endereco: res.endereco
+        });
+      });
+    }
   }
 
-  onSubmit(): void {
+  save(): void {
     if (this.profissionalForm.valid) {
       const profissional: Medico = this.profissionalForm.value;
+      if (this.idEditando) profissional.id = this.idEditando;
+
       this.medicoService.save(profissional).subscribe({
         next: () => {
           console.log('Profissional salvo com sucesso!');
           this.profissionalForm.reset();
+          this.router.navigate(['/profissionais']);
         },
         error: (err: HttpErrorResponse) => {
           console.error('Erro ao salvar profissional:', err.message);
@@ -74,7 +104,7 @@ export class ProfissionalFormComponent implements OnInit {
     }
   }
 
-  onCancel(): void {
-    this.profissionalForm.reset();
+  cancel(): void {
+    this.router.navigate(['/profissionais']);
   }
 }

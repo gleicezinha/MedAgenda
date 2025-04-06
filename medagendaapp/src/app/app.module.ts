@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Import necessário
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +53,7 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule, // ✅ Aqui está a importação adicionada
+    HttpClientModule,
     FullCalendarModule,
     MatButtonModule,
     MatFormFieldModule,

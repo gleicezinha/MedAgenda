@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Medico } from '../../models/medico.model';
 import { MedicoService } from '../../services/medico.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profissionais',
@@ -13,7 +14,10 @@ export class ProfissionaisComponent implements OnInit {
   profissionais: Medico[] = [];
   displayedColumns: string[] = ['nome', 'especialidade', 'contato', 'email', 'acoes'];
 
-  constructor(private medicoService: MedicoService) {}
+  constructor(
+    private medicoService: MedicoService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carregarProfissionais();
@@ -31,7 +35,7 @@ export class ProfissionaisComponent implements OnInit {
   }
 
   editar(profissional: Medico): void {
-    console.log('Editar profissional:', profissional);
+    this.router.navigate(['/profissional-form'], { queryParams: { id: profissional.id } });
   }
 
   deletar(profissional: Medico): void {
