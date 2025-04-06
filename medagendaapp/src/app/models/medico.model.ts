@@ -6,6 +6,5 @@ export type Medico = {
     registroConselho: string;
     telefone: string;
     email: string;
-    especialidade_id: number;
-    especialidade_nome: string;
+    especialidade: Especialidade;
 }

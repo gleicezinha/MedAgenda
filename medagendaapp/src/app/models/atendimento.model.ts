@@ -1,12 +1,15 @@
+import { Paciente } from './paciente.model';
+import { Medico } from './medico.model';
+import { EAtendimento } from './eatendimento.model';
+import { EStatus } from './estatus.model';
+
 export type Atendimento = {
-    id: number;
-    data: string;
-    hora: string;
-    status: string;
-    paciente_id: number;
-    paciente_nome: string;
-    medico_id: number;
-    medico_nome: string;
-    TipoDeAtendimento_id: number;
-    TipoDeAtendimento_nome: string;
-}
+  id?: number;
+  dataDeAtendimento: string; // 'YYYY-MM-DD'
+  horarioDeAtendimento: string; // 'HH:mm:ss.SSSSSS'
+  status: EStatus;
+  tipoDeAtendimento: EAtendimento;
+  paciente: Paciente;
+  medico: Medico;
+  idPai?: number;
+};
