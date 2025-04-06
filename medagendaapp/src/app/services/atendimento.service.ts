@@ -13,23 +13,23 @@ export class AtendimentoService {
 
   constructor(private http: HttpClient) { }
 
-  get(): Observable<Atendimento[]> {
+  getAtendimentos(): Observable<Atendimento[]> {
     return this.http.get<Atendimento[]>(`${this.apiURL}/consultar-todos`);
   }
 
-  getById(id: number): Observable<Atendimento> {
+  getAtendimentoPorId(id: number): Observable<Atendimento> {
     return this.http.get<Atendimento>(`${this.apiURL}/${id}`);
   }
 
-  create(data: Atendimento): Observable<Atendimento> {
+  criarAtendimento(data: Atendimento): Observable<Atendimento> {
     return this.http.post<Atendimento>(this.apiURL, data);
   }
 
-  update(id: number, data: Atendimento): Observable<Atendimento> {
+  atualizarAtendimento(id: number, data: Atendimento): Observable<Atendimento> {
     return this.http.put<Atendimento>(`${this.apiURL}/${id}`, data);
   }
 
-  delete(id: number): Observable<void> {
+  deletarAtendimento(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiURL}/remover/${id}`);
   }
 }

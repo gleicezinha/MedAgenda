@@ -79,7 +79,7 @@ export class AtendimentoFormComponent implements OnInit {
 
       atendimento.horarioDeAtendimento += ':00.000000';
 
-      this.atendimentoService.create(atendimento).subscribe({
+      this.atendimentoService.criarAtendimento(atendimento).subscribe({
         next: (res) => {
           console.log('Atendimento criado com sucesso:', res);
           this.atendimentoForm.reset();
