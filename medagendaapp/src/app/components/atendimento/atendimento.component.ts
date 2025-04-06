@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Atendimento } from '../../models/atendimento.model';
 import { AtendimentoService } from '../../services/atendimento.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-atendimento',
@@ -14,7 +15,10 @@ export class AtendimentoComponent implements OnInit {
   displayedColumns: string[] = ['dataDeAtendimento', 'horarioDeAtendimento', 'medico', 'paciente', 'tipoDeAtendimento', 'acoes'];
   atendimentos: Atendimento[] = [];
 
-  constructor(private atendimentoService: AtendimentoService) {}
+  constructor(
+    private atendimentoService: AtendimentoService, 
+    private router: Router) 
+  {}
 
   ngOnInit(): void {
     this.carregarAtendimentos();
@@ -30,4 +34,9 @@ export class AtendimentoComponent implements OnInit {
       }
     });
   }
+
+  editar(atendimento: Atendimento): void {
+    this.router.navigate(['/atendimento-form'], { queryParams: { id: atendimento.id } });
+  }
+  
 }

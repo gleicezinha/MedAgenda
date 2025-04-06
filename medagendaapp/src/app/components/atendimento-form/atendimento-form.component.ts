@@ -9,6 +9,7 @@ import { EAtendimento } from '../../models/eatendimento.model';
 import { EStatus } from '../../models/estatus.model';
 import { PacienteService } from '../../services/paciente.service';
 import { MedicoService } from '../../services/medico.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-atendimento-form',
@@ -22,6 +23,7 @@ export class AtendimentoFormComponent implements OnInit {
   pacientes: Paciente[] = [];
   profissionais: Medico[] = [];
   especialidades: string[] = [];
+  idEditando: number | null = null;
 
   carregarEspecialidades(): void {
     this.especialidades = [
@@ -39,7 +41,9 @@ export class AtendimentoFormComponent implements OnInit {
     private fb: FormBuilder,
     private atendimentoService: AtendimentoService,
     private pacienteService: PacienteService,
-    private medicoService: MedicoService
+    private medicoService: MedicoService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,15 +51,35 @@ export class AtendimentoFormComponent implements OnInit {
       dataDeAtendimento: ['', Validators.required],
       horarioDeAtendimento: ['', Validators.required],
       tipoDeAtendimento: ['', Validators.required],
-      paciente: [null, Validators.required],
-      medico: [null, Validators.required],
-      status: [EStatus.AGENDADO]
+      atendente: [''],
+      especialidade: [''],
+      medico: ['', Validators.required],
+      paciente: ['', Validators.required]
     });
-
-    this.carregarEspecialidades();
-    this.carregarPacientes();
-    this.carregarMedicos();
+    
+  
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) {
+      this.atendimentoService.getById(+id).subscribe({
+        next: (res) => {
+          this.atendimentoForm.patchValue({
+            dataDeAtendimento: res.dataDeAtendimento,
+            horarioDeAtendimento: res.horarioDeAtendimento,
+            medico: res.medico.nomeCompleto,
+            paciente: res.paciente.nomeCompleto,
+            tipoDeAtendimento: res.tipoDeAtendimento,
+            status: res.status
+          });
+          this.idEditando = res.id ?? null;
+        }
+      });
+    }
   }
+
+  compararTipos(tipo1: any, tipo2: any): boolean {
+    return tipo1 && tipo2 ? tipo1 === tipo2 : tipo1 === tipo2;
+  }
+  
 
   carregarPacientes(): void {
     this.pacienteService.get().subscribe({
@@ -75,25 +99,25 @@ export class AtendimentoFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.atendimentoForm.valid) {
-      const atendimento: Atendimento = this.atendimentoForm.value;
-
-      atendimento.horarioDeAtendimento += ':00.000000';
-
+      const atendimento = this.atendimentoForm.value;
+  
+      if (this.idEditando) {
+        atendimento.id = this.idEditando;
+      }
+  
       this.atendimentoService.save(atendimento).subscribe({
-        next: (res) => {
-          console.log('Atendimento criado com sucesso:', res);
-          this.atendimentoForm.reset();
+        next: () => {
+          console.log('Atendimento salvo com sucesso');
+          this.router.navigate(['/atendimento']);
         },
         error: (err) => {
-          console.error('Erro ao criar atendimento:', err);
+          console.error('Erro ao salvar atendimento:', err);
         }
       });
-    } else {
-      console.log('Formulário inválido');
     }
-  }
+  }  
 
-  onCancel(): void {
-    this.atendimentoForm.reset();
+  cancel(): void {
+    this.router.navigate(['/atendimento']);
   }
 }

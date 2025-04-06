@@ -4,36 +4,37 @@
   <form [formGroup]="atendimentoForm" (ngSubmit)="onSubmit()">
     <div class="form-grid">
       <div class="campo">
-        <label for="dataAtendimento">Dia do Atendimento:</label>
-        <input id="dataAtendimento" formControlName="dataAtendimento" type="date" />
+        <label for="dataDeAtendimento">Dia do Atendimento:</label>
+        <input id="dataDeAtendimento" formControlName="dataDeAtendimento" type="date" />
       </div>
       <div class="campo">
-        <label for="horarioAtendimento">Horário do Atendimento:</label>
-        <input id="horarioAtendimento" formControlName="horarioAtendimento" type="time" />
+        <label for="horarioDeAtendimento">Horário do Atendimento:</label>
+        <input id="horarioDeAtendimento" formControlName="horarioDeAtendimento" type="time" />
       </div>
       <div class="campo">
-        <label for="tipoAtendimento">Tipo de Atendimento:</label>
-        <select id="tipoAtendimento" formControlName="tipoAtendimento">
-          <option value="Consulta">Consulta</option>
-          <option value="Exame">Exame</option>
-          <option value="Retorno">Retorno</option>
+        <label for="tipoDeAtendimento">Tipo de Atendimento:</label>
+        <select id="tipoDeAtendimento" formControlName="tipoDeAtendimento" [compareWith]="compararTipos">
+          <option *ngFor="let tipo of tiposDeAtendimento" [ngValue]="tipo">
+            {{ tipo }}
+          </option>
         </select>
+
       </div>
       <div class="campo">
         <label for="atendente">Atendente:</label>
         <input id="atendente" formControlName="atendente" type="text" />
       </div>
-        <div class="campo">
-            <label for="especialidade">Especialidade:</label>
-            <select id="especialidade" formControlName="especialidade">
-            <option *ngFor="let especialidade of especialidades" [value]="especialidade">
-                {{ especialidade }}
-            </option>
-            </select>
-        </div>
       <div class="campo">
-        <label for="profissional">Profissional:</label>
-        <input id="profissional" formControlName="profissional" type="text" />
+        <label for="especialidade">Especialidade:</label>
+        <select id="especialidade" formControlName="especialidade">
+          <option *ngFor="let especialidade of especialidades" [value]="especialidade">
+            {{ especialidade }}
+          </option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="medico">Profissional:</label>
+        <input id="medico" formControlName="medico" type="text" />
       </div>
       <div class="campo">
         <label for="paciente">Paciente:</label>
@@ -43,7 +44,7 @@
 
     <div class="botoes">
       <button type="submit" class="btn-salvar">Salvar</button>
-      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
     </div>
   </form>
 </div>
