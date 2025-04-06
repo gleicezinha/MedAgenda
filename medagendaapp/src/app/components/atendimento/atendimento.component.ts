@@ -11,7 +11,7 @@ import { AtendimentoService } from '../../services/atendimento.service';
   styleUrls: ['./atendimento.component.scss'],
 })
 export class AtendimentoComponent implements OnInit {
-  displayedColumns: string[] = ['data', 'hora', 'profissional', 'paciente', 'status', 'acoes'];
+  displayedColumns: string[] = ['dataDeAtendimento', 'horarioDeAtendimento', 'medico', 'paciente', 'tipoDeAtendimento', 'acoes'];
   atendimentos: Atendimento[] = [];
 
   constructor(private atendimentoService: AtendimentoService) {}

@@ -30,6 +30,7 @@ import { AtendenteFormComponent } from './components/atendente-form/atendente-fo
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
     MatToolbarModule,
     MatTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
