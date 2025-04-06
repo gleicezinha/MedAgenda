@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PacienteService } from '../../services/paciente.service';
+import { Paciente } from '../../models/paciente.model';
 
 @Component({
   selector: 'app-paciente-form',
@@ -9,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PacienteFormComponent implements OnInit {
   pacienteForm!: FormGroup;
+  idEditando: number | null = null;
 
   ufs = [
     { sigla: 'AC', nome: 'Acre' },
@@ -37,16 +41,20 @@ export class PacienteFormComponent implements OnInit {
     { sigla: 'SC', nome: 'Santa Catarina' },
     { sigla: 'SP', nome: 'São Paulo' },
     { sigla: 'SE', nome: 'Sergipe' },
-    { sigla: 'TO', nome: 'Tocantins' },
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private pacienteService: PacienteService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.pacienteForm = this.fb.group({
       nome: ['', Validators.required],
       dataNascimento: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
+      cpf: ['', [Validators.required]],
       contato: ['', Validators.required],
       contatoEmergencia: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -57,17 +65,44 @@ export class PacienteFormComponent implements OnInit {
       endereco: ['', Validators.required],
       uf: ['', Validators.required],
     });
+
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) {
+      this.pacienteService.getById(+id).subscribe({
+        next: (paciente: Paciente) => {
+          this.pacienteForm.patchValue(paciente);
+          this.idEditando = paciente.id ?? null;
+        },
+        error: (err) => {
+          console.error('Erro ao carregar paciente:', err);
+        }
+      });
+    }
   }
 
   onSubmit(): void {
     if (this.pacienteForm.valid) {
-      console.log('Paciente cadastrado:', this.pacienteForm.value);
+      const paciente: Paciente = this.pacienteForm.value;
+
+      if (this.idEditando) {
+        paciente.id = this.idEditando;
+      }
+
+      this.pacienteService.save(paciente).subscribe({
+        next: () => {
+          console.log('Paciente salvo com sucesso!');
+          this.router.navigate(['/pacientes']);
+        },
+        error: (err) => {
+          console.error('Erro ao salvar paciente:', err);
+        }
+      });
     } else {
       console.log('Formulário inválido');
     }
   }
 
   onCancel(): void {
-    this.pacienteForm.reset();
+    this.router.navigate(['/pacientes']);
   }
 }
