@@ -47,6 +47,8 @@ export class AtendimentoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.carregarEspecialidades();
+  
     this.atendimentoForm = this.fb.group({
       dataDeAtendimento: ['', Validators.required],
       horarioDeAtendimento: ['', Validators.required],
@@ -56,30 +58,53 @@ export class AtendimentoFormComponent implements OnInit {
       medico: ['', Validators.required],
       paciente: ['', Validators.required]
     });
-    
   
     const id = this.route.snapshot.queryParamMap.get('id');
+  
     if (id) {
-      this.atendimentoService.getById(+id).subscribe({
-        next: (res) => {
-          this.atendimentoForm.patchValue({
-            dataDeAtendimento: res.dataDeAtendimento,
-            horarioDeAtendimento: res.horarioDeAtendimento,
-            medico: res.medico.nomeCompleto,
-            paciente: res.paciente.nomeCompleto,
-            tipoDeAtendimento: res.tipoDeAtendimento,
-            status: res.status
-          });
-          this.idEditando = res.id ?? null;
-        }
-      });
+      this.carregarMedicos();
+      this.carregarPacientesComPatch(+id); // 👈 usa método com patch
+    } else {
+      this.carregarMedicos();
+      this.carregarPacientes();
     }
   }
+
+  carregarPacientesComPatch(id: number): void {
+    this.pacienteService.get().subscribe({
+      next: (pacientes: Paciente[]) => {
+        this.pacientes = pacientes;
+  
+        this.atendimentoService.getById(id).subscribe({
+          next: (res) => {
+            this.atendimentoForm.patchValue({
+              dataDeAtendimento: res.dataDeAtendimento,
+              horarioDeAtendimento: res.horarioDeAtendimento,
+              medico: res.medico,
+              paciente: res.paciente,
+              tipoDeAtendimento: res.tipoDeAtendimento,
+              status: res.status
+            });
+            this.idEditando = res.id ?? null;
+          }
+        });
+      }
+    });
+  }
+  
+
+  compararMedicos(m1: Medico, m2: Medico): boolean {
+    return m1 && m2 ? m1.id === m2.id : m1 === m2;
+  }
+  
 
   compararTipos(tipo1: any, tipo2: any): boolean {
     return tipo1 && tipo2 ? tipo1 === tipo2 : tipo1 === tipo2;
   }
   
+  compararPacientes(p1: Paciente, p2: Paciente): boolean {
+    return p1 && p2 ? p1.id === p2.id : p1 === p2;
+  }
 
   carregarPacientes(): void {
     this.pacienteService.get().subscribe({
