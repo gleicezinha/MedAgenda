@@ -2,7 +2,7 @@ import { Especialidade } from "./especialidade.model";
 
 export type Medico = {
     id: number;
-    nome: string;
+    nomeCompleto: string;
     registroConselho: string;
     telefone: string;
     email: string;

@@ -6,19 +6,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { HttpClientModule } from '@angular/common/http'; // ✅ Import necessário
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { MatCardModule } from '@angular/material/card'; 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { FormsModule } from '@angular/forms';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component'; 
-import { MatTableModule } from '@angular/material/table';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ProfissionaisComponent } from './components/profissionais/profissionais.component';
 import { AtendimentoComponent } from './components/atendimento/atendimento.component'; 
-import { PacienteComponent} from './components/paciente/paciente.component'; 
+import { PacienteComponent } from './components/paciente/paciente.component'; 
 import { PacienteDetalhesComponent } from './components/paciente-detalhes/paciente-detalhes.component'; 
 import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
 import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
@@ -26,46 +29,44 @@ import { AtendimentoFormComponent } from './components/atendimento-form/atendime
 import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FullCalendarModule } from '@fullcalendar/angular';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ProfissionalFormComponent,
-    ProfissionaisComponent,
-    AtendimentoComponent,
-    PacienteComponent,
-    PacienteDetalhesComponent,
-    AtendimentoFormComponent,
-    PacienteFormComponent, 
-    AtendenteFormComponent,
     ResetPasswordComponent,
-    EspecialidadeFormComponent,
-    CalendarioComponent,
     UsuarioComponent,
+    ProfissionaisComponent,
+    ProfissionalFormComponent,
+    AtendimentoComponent,
+    AtendimentoFormComponent,
+    PacienteComponent,
+    PacienteFormComponent, 
+    PacienteDetalhesComponent,
+    AtendenteFormComponent,
+    EspecialidadeFormComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
-    FullCalendarModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule, // ✅ Aqui está a importação adicionada
+    FullCalendarModule,
     MatButtonModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
-    AppRoutingModule,
     MatToolbarModule,
+    MatTableModule,
     FormsModule,
-    MatTableModule
+    ReactiveFormsModule
   ],
   providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

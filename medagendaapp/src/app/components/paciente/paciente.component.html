@@ -18,8 +18,8 @@
 
     <div class="right-panel">
         <div class="pacientes-list">
-            <div class="paciente-item" *ngFor="let paciente of pacientes; let i = index">
-                <span>{{ paciente.nome }}</span>
+            <div class="paciente-item" *ngFor="let paciente of registros; let i = index">
+                <span>{{ paciente.nomeCompleto }}</span>
                 <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">ver prontuário</a>           
             </div>
         </div>

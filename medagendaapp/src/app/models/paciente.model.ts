@@ -1,6 +1,6 @@
 export type Paciente = {
     id: number;
-    nome: string;
+    nomeCompleto: string;
     email: string;
     telefone: string;
     telefoneEmergencia: string;
