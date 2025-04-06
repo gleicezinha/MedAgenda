@@ -38,6 +38,10 @@ export class ProfissionaisComponent implements OnInit {
     this.router.navigate(['/profissional-form'], { queryParams: { id: profissional.id } });
   }
 
+  adicionar(): void {
+    this.router.navigate(['/profissional-form']);
+  }
+
   deletar(profissional: Medico): void {
     if (confirm(`Deseja remover ${profissional.nomeCompleto}?`)) {
       this.medicoService.delete(profissional.id!).subscribe({

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Paciente } from '../../models/paciente.model';
 import { PacienteService } from '../../services/paciente.service';
 import { ICrudList } from '../i-crud-list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paciente',
@@ -12,7 +13,8 @@ import { ICrudList } from '../i-crud-list';
 export class PacienteComponent implements ICrudList<Paciente>{
   
   constructor(
-    private servico: PacienteService
+    private servico: PacienteService,
+    private router: Router
   ){ }
 
   ngOnInit(): void {
@@ -31,6 +33,10 @@ export class PacienteComponent implements ICrudList<Paciente>{
       }
     });
     
+  }
+
+  cadastrar(): void {
+    this.router.navigate(['/paciente-form']);
   }
 
   delete(id: number): void {

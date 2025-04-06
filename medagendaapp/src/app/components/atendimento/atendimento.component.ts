@@ -35,6 +35,10 @@ export class AtendimentoComponent implements OnInit {
     });
   }
 
+  cadastrar(): void {
+    this.router.navigate(['/atendimento-form']);
+  }
+
   editar(atendimento: Atendimento): void {
     this.router.navigate(['/atendimento-form'], { queryParams: { id: atendimento.id } });
   }
