@@ -12,10 +12,10 @@ export class UsuarioService implements ICrudService<Usuario> {
 
   constructor(private http: HttpClient) {}
 
-  apiUrl: string = environment.API_URL + '/usuario';
+  apiUrl: string = environment.API_URL + '/config/usuario';
 
   get(termoBusca?: string): Observable<Usuario[]> {
-    let url = this.apiUrl + '/consultar-todos';
+    let url = this.apiUrl + '/consultar/todos';
     if (termoBusca) {
       url += '?termoBusca=' + termoBusca;
     }
