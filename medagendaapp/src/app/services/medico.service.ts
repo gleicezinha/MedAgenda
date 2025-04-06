@@ -3,33 +3,41 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Medico } from '../models/medico.model';
 import { environment } from '../../environments/environment';
+import { ICrudService } from './i-crud-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicoService {
+export class MedicoService implements ICrudService<Medico> {
 
-  apiURL: string = environment.API_URL + '/medico/';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  apiUrl: string = environment.API_URL + '/medico';
 
-  get(): Observable<Medico[]> {
-    return this.http.get<Medico[]>(`${this.apiURL}/consultar-todos`);
+  get(termoBusca?: string): Observable<Medico[]> {
+    let url = this.apiUrl + '/consultar-todos';
+    if (termoBusca) {
+      url += '?termoBusca=' + termoBusca;
+    }
+    return this.http.get<Medico[]>(url);
   }
 
   getById(id: number): Observable<Medico> {
-    return this.http.get<Medico>(`${this.apiURL}/${id}`);
+    return this.http.get<Medico>(`${this.apiUrl}/${id}`);
   }
 
-  create(data: Medico): Observable<Medico> {
-    return this.http.post<Medico>(this.apiURL, data);
-  }
-
-  update(id: number, data: Medico): Observable<Medico> {
-    return this.http.put<Medico>(`${this.apiURL}/${id}`, data);
+  save(objeto: Medico): Observable<Medico> {
+    let url = this.apiUrl;
+    if (objeto.id) {
+      url += '/atualizar';
+      return this.http.put<Medico>(url, objeto);
+    } else {
+      url += '/inserir';
+      return this.http.post<Medico>(url, objeto);
+    }
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/remover/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
   }
 }

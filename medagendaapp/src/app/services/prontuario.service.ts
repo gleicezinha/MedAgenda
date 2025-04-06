@@ -3,33 +3,41 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Prontuario } from '../models/prontuario.model';
 import { environment } from '../../environments/environment';
+import { ICrudService } from './i-crud-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProntuarioService {
+export class ProntuarioService implements ICrudService<Prontuario> {
 
-  apiURL: string = environment.API_URL + '/prontuario';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  apiUrl: string = environment.API_URL + '/prontuario';
 
-  get(): Observable<Prontuario[]> {
-    return this.http.get<Prontuario[]>(`${this.apiURL}/consultar-todos`);
+  get(termoBusca?: string): Observable<Prontuario[]> {
+    let url = this.apiUrl + '/consultar-todos';
+    if (termoBusca) {
+      url += '?termoBusca=' + termoBusca;
+    }
+    return this.http.get<Prontuario[]>(url);
   }
 
   getById(id: number): Observable<Prontuario> {
-    return this.http.get<Prontuario>(`${this.apiURL}/${id}`);
+    return this.http.get<Prontuario>(`${this.apiUrl}/${id}`);
   }
 
-  create(data: Prontuario): Observable<Prontuario> {
-    return this.http.post<Prontuario>(this.apiURL, data);
-  }
-
-  update(id: number, data: Prontuario): Observable<Prontuario> {
-    return this.http.put<Prontuario>(`${this.apiURL}/${id}`, data);
+  save(objeto: Prontuario): Observable<Prontuario> {
+    let url = this.apiUrl;
+    if (objeto.id) {
+      url += '/atualizar';
+      return this.http.put<Prontuario>(url, objeto);
+    } else {
+      url += '/inserir';
+      return this.http.post<Prontuario>(url, objeto);
+    }
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/remover/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
   }
 }

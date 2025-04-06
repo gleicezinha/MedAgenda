@@ -21,7 +21,7 @@ export class AtendimentoComponent implements OnInit {
   }
 
   carregarAtendimentos(): void {
-    this.atendimentoService.getAtendimentos().subscribe({
+    this.atendimentoService.get().subscribe({
       next: (dados: Atendimento[]) => {
         this.atendimentos = dados;
       },

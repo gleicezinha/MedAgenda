@@ -3,33 +3,41 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
 import { environment } from '../../environments/environment';
+import { ICrudService } from './i-crud-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuarioService implements ICrudService<Usuario> {
 
-  apiURL: string = environment.API_URL + '/usuario';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  apiUrl: string = environment.API_URL + '/usuario';
 
-  get(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.apiURL}/consultar-todos`);
+  get(termoBusca?: string): Observable<Usuario[]> {
+    let url = this.apiUrl + '/consultar-todos';
+    if (termoBusca) {
+      url += '?termoBusca=' + termoBusca;
+    }
+    return this.http.get<Usuario[]>(url);
   }
 
   getById(id: number): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiURL}/${id}`);
+    return this.http.get<Usuario>(`${this.apiUrl}/${id}`);
   }
 
-  create(data: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiURL, data);
-  }
-
-  update(id: number, data: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiURL}/${id}`, data);
+  save(objeto: Usuario): Observable<Usuario> {
+    let url = this.apiUrl;
+    if (objeto.id) {
+      url += '/atualizar';
+      return this.http.put<Usuario>(url, objeto);
+    } else {
+      url += '/inserir';
+      return this.http.post<Usuario>(url, objeto);
+    }
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/remover/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
   }
 }
