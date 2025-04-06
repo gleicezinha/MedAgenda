@@ -14,6 +14,7 @@ import { AtendimentoFormComponent } from './components/atendimento-form/atendime
 import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,16 +22,17 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent }, 
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'profissionais', component: ProfissionaisComponent }, 
-  {path: 'atendimento', component: AtendimentoComponent },
-  {path: 'paciente', component: PacienteComponent },
-  {path: 'paciente-form', component: PacienteFormComponent },
+  { path: 'atendimento', component: AtendimentoComponent },
+  { path: 'paciente', component: PacienteComponent },
+  { path: 'paciente-form', component: PacienteFormComponent },
   { path: 'paciente-detalhes/:id', component: PacienteDetalhesComponent }, 
-  {path: 'profissional-form', component: ProfissionalFormComponent },
+  { path: 'profissional-form', component: ProfissionalFormComponent },
   { path: 'usuario', component: UsuarioComponent },
-  {path: 'atendimento-form', component: AtendimentoFormComponent},
-  {path: 'atendente-form', component: AtendenteFormComponent},
-  {path: 'especialidade-form', component: EspecialidadeFormComponent},
-  {path: 'calendario', component: CalendarioComponent},
+  { path: 'usuario-form', component: UsuarioFormComponent },
+  { path: 'atendimento-form', component: AtendimentoFormComponent},
+  { path: 'atendente-form', component: AtendenteFormComponent},
+  { path: 'especialidade-form', component: EspecialidadeFormComponent},
+  { path: 'calendario', component: CalendarioComponent},
   { path: '**', redirectTo: 'login' },
 ];
 

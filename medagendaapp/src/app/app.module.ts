@@ -29,6 +29,7 @@ import { AtendimentoFormComponent } from './components/atendimento-form/atendime
 import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
     ForgotPasswordComponent,
     ResetPasswordComponent,
     UsuarioComponent,
+    UsuarioFormComponent,
     ProfissionaisComponent,
     ProfissionalFormComponent,
     AtendimentoComponent,

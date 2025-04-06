@@ -1,0 +1,40 @@
+<div class="usuario-form-container">
+  <h1 class="titulo">Formulário de Usuário</h1>
+
+  <form [formGroup]="usuarioForm">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="nome">Nome:</label>
+        <input id="nome" formControlName="nome" type="text" />
+      </div>
+
+      <div class="campo">
+        <label for="telefone">Telefone:</label>
+        <input id="telefone" formControlName="telefone" type="text" />
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input id="email" formControlName="email" type="email" />
+      </div>
+
+      <div class="campo">
+        <label for="papel">Papel:</label>
+        <select id="papel" formControlName="papel">
+          <option value="ADMIN">Administrador</option>
+          <option value="ATENDENTE">Atendente</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="senha">Senha:</label>
+        <input id="senha" formControlName="senha" type="password" />
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

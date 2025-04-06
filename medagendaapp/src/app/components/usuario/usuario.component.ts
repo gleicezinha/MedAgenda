@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -13,7 +14,9 @@ export class UsuarioComponent implements OnInit {
   usuarios: Usuario[] = [];
   displayedColumns: string[] = ['nome', 'contato', 'email', 'papel', 'acoes'];
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioService.get().subscribe({
@@ -26,10 +29,24 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  editar(usuario: Usuario): void {
-    console.log('Editar usuário:', usuario);
-    // navegar para edição
+  adicionarUsuario(): void {
+    this.router.navigate(['/usuario-form']);
   }
+  
+  editarUsuario(id: number): void {
+    this.router.navigate(['/usuario-form'], { queryParams: { id } });
+  }
+  
+  deletarUsuario(id: number): void {
+    if (confirm('Tem certeza que deseja excluir este usuário?')) {
+      this.usuarioService.delete(id).subscribe({
+        next: () => {
+          this.usuarios = this.usuarios.filter(u => u.id !== id);
+        }
+      });
+    }
+  }
+
 
   deletar(usuario: Usuario): void {
     if (confirm(`Deseja realmente remover ${usuario.nomeUsuario}?`)) {
