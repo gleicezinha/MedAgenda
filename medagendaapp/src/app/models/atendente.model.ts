@@ -1,0 +1,10 @@
+export type Atendente = {
+    id: number;
+    nomeUsuario: string;
+    cpf: string;
+    email: string;
+    telefone: string;
+    senha: string;
+    papel: string;
+    ativo: boolean;
+}
