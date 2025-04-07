@@ -1,4 +1,4 @@
-<div class="paciente-detalhes-container" *ngFor="let paciente of pacientes">
+<div class="paciente-detalhes-container">
   <h1 class="titulo">Paciente: {{ paciente.nomeCompleto }}</h1>
 
   <div class="conteudo">
@@ -62,8 +62,8 @@
       <div class="consultas">
         <h3>Consultas</h3>
         <ul>
-          <li *ngFor="let atendimento of atendimentos">
-            <span>{{ atendimento.dataDeAtendimento }}</span>
+          <li *ngFor="let prontuario of prontuarios">
+            <span>{{prontuario.atendimento.dataDeAtendimento }}</span>
           </li>
         </ul>
       </div>

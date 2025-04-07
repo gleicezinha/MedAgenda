@@ -4,17 +4,14 @@ import { Medico } from "./medico.model";
 
 export type Prontuario = {
     id: number;
-    data: string;
-    paciente_id: number;
-    paciente_nome: string;
-    medico_id: number;
-    medico_nome: string;
-    TipoDeAtendimento_id: number;
-    TipoDeAtendimento_nome: string;
+    problemaRelatado: string;
+    descricao: string;
+    prescricao: string;
+    atendimento: Atendimento;
     temAlergia: boolean;
     qualAlergia: string;
-    temDoencaCognitiva: boolean;
-    qualDoencaCognitiva: string;
     temRemedio: boolean;
     qualRemedio: string;
-};
+    temDoencaCognitiva: boolean;
+    qualDoencaCognitiva: string;
+}
