@@ -16,5 +16,12 @@ public interface ProntuarioRepository extends JpaRepository<Prontuario, Long> {
         "OR (:termoBusca IS NULL OR a.paciente.nomeCompleto LIKE %:termoBusca%) "
     )
     List<Prontuario> busca(String termoBusca);
+
+    @Query(
+    "SELECT p FROM Prontuario p " +
+    "WHERE p.atendimento.paciente.id = :pacienteId"
+    )
+    List<Prontuario> buscaPorPaciente(Long pacienteId);
+
     
 }

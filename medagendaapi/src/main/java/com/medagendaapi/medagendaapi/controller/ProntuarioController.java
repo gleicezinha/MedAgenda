@@ -58,5 +58,11 @@ public class ProntuarioController implements ICrudController<Prontuario> {
         Prontuario registro = servico.save(objeto);
         return ResponseEntity.ok(registro);
     }
+
+    @GetMapping("/consultar-paciente/{pacienteId}")
+    public ResponseEntity<List<Prontuario>> getByPaciente(@PathVariable Long pacienteId) {
+        List<Prontuario> registros = servico.getByPaciente(pacienteId);
+        return ResponseEntity.ok(registros);
+    }
     
 }

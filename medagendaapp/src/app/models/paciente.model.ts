@@ -3,7 +3,7 @@ export type Paciente = {
     nomeCompleto: string;
     email: string;
     telefone: string;
-    telefoneEmergencia: string;
+    telefoneEmergencial: string;
     cpf: string;
     dataNascimento: string;
     grupoSanguineo: string;

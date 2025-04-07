@@ -2,6 +2,8 @@ import { Paciente } from './paciente.model';
 import { Medico } from './medico.model';
 import { EAtendimento } from './eatendimento.model';
 import { EStatus } from './estatus.model';
+import{ Prontuario } from './prontuario.model';
+
 
 export type Atendimento = {
   id?: number;
@@ -9,7 +11,9 @@ export type Atendimento = {
   horarioDeAtendimento: string; // 'HH:mm:ss.SSSSSS'
   status: EStatus;
   tipoDeAtendimento: EAtendimento;
+  prontuario?: string;
   paciente: Paciente;
   medico: Medico;
   idPai?: number;
+  
 };

@@ -25,6 +25,18 @@ export class AtendimentoService implements ICrudService<Atendimento> {
   getById(id: number): Observable<Atendimento> {
     return this.http.get<Atendimento>(`${this.apiUrl}/${id}`);
   }
+  getByPacienteId(id: number): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.apiUrl}?pacienteId=${id}`);
+  }
+  getByMedicoId(id: number): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.apiUrl}?medicoId=${id}`);
+  }
+  getByProntuarioId(id: number): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.apiUrl}?prontuarioId=${id}`);
+  }
+  getByTipoDeAtendimentoId(id: number): Observable<Atendimento[]> {
+    return this.http.get<Atendimento[]>(`${this.apiUrl}?tipoDeAtendimentoId=${id}`);
+  }
 
   save(objeto: Atendimento): Observable<Atendimento> {
     let url = this.apiUrl;
