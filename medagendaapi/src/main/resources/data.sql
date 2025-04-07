@@ -55,3 +55,6 @@ VALUES
 (4, 'Tosse persistente há 10 dias.', 'Suspeita de bronquite leve. Ausência de febre.', 'Prescrito xarope expectorante.', TRUE, 'Lactose', FALSE, NULL, FALSE, NULL),
 (5, 'Consulta cancelada pelo paciente.', 'Atendimento não realizado.', NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL);
 
+INSERT INTO atendente (nome_completo, cpf, telefone, especialidade_atendente, email, cep, bairro, estado, endereco)
+VALUES ('Ana Beatriz da Silva', '123.456.789-00', '(11) 91234-5678', 'SECRETARIO', 'ana.silva@example.com', '01234-567', 'Centro', 'SP', 'Rua das Flores, 123');
+
