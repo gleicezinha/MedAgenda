@@ -12,6 +12,7 @@ import { PacienteFormComponent } from './components/paciente-form/paciente-form.
 import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
 import { AtendimentoFormComponent } from './components/atendimento-form/atendimento-form.component';
 import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
+import { EspecialidadeComponent } from './components/especialidade/especialidade.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'usuario-form', component: UsuarioFormComponent },
   { path: 'atendimento-form', component: AtendimentoFormComponent},
   { path: 'atendente-form', component: AtendenteFormComponent},
+  { path: 'especialidade', component: EspecialidadeComponent},
   { path: 'especialidade-form', component: EspecialidadeFormComponent},
   { path: 'calendario', component: CalendarioComponent},
   { path: '**', redirectTo: 'login' },

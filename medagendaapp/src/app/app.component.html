@@ -11,10 +11,17 @@
 </mat-toolbar>
 
 <div class="side-menu" [class.open]="menuOpen">
-  <button mat-button class="menu-item" [routerLink]="'/usuario'">
-    <mat-icon>person</mat-icon>
-    Usuário
-  </button>
+  <dropdown-menu>
+    Configurações
+      <button mat-button class="menu-item" [routerLink]="'/especialidade'">
+      <mat-icon>star</mat-icon>
+      Especialidade
+    </button>
+    <button mat-button class="menu-item" [routerLink]="'/usuario'">
+      <mat-icon>person</mat-icon>
+      Usuário
+    </button>
+</dropdown-menu>
   <button mat-button class="menu-item" [routerLink]="'/atendimento'">
     <mat-icon>assignment</mat-icon>
     Atendimento
