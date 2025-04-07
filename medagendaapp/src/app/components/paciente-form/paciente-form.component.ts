@@ -55,11 +55,11 @@ export class PacienteFormComponent implements OnInit {
       nomeCompleto: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       cpf: ['', [Validators.required]],
-      contato: ['', Validators.required],
-      contatoEmergencia: [''],
+      telefone: ['', Validators.required],
+      telefoneEmergencia: [''],
       email: ['', [Validators.required, Validators.email]],
       sexo: ['', Validators.required],
-      tipoSanguineo: ['', Validators.required],
+      grupoSanguineo: ['', Validators.required],
       cep: ['', Validators.required],
       bairro: ['', Validators.required],
       endereco: ['', Validators.required],
@@ -89,9 +89,9 @@ export class PacienteFormComponent implements OnInit {
       }
 
       this.pacienteService.save(paciente).subscribe({
-        next: () => {
+        next: (pacienteSalvo: Paciente) => {
           console.log('Paciente salvo com sucesso!');
-          this.router.navigate(['/pacientes']);
+          this.router.navigate(['/paciente-detalhes', pacienteSalvo.id]);
         },
         error: (err) => {
           console.error('Erro ao salvar paciente:', err);
@@ -103,6 +103,6 @@ export class PacienteFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/pacientes']);
+    this.router.navigate(['/paciente']);
   }
 }

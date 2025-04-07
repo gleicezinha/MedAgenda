@@ -6,7 +6,7 @@
       <div class="detalhes-grid">
         <div class="campo">
           <label>Data de Nascimento:</label>
-          <span>{{ paciente.dataNascimento }}</span>
+          <span>{{ paciente.dataNascimento  | date: 'dd/MM/yyyy'}}</span>
         </div>
         <div class="campo">
           <label>CPF:</label>
@@ -26,11 +26,19 @@
         </div>
         <div class="campo">
           <label>Sexo:</label>
-          <span>{{ paciente.sexo }}</span>
+          <span *ngIf="paciente.sexo  == 'F'">Feminino</span>
+          <span *ngIf="paciente.sexo  == 'M'">Masculino</span>
         </div>
         <div class="campo">
           <label>Tipo Sanguíneo:</label>
-          <span>{{ paciente.grupoSanguineo }}</span>
+          <span *ngIf="paciente.grupoSanguineo == 'B_NEGATIVO'">B-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'A_NEGATIVO'">A-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'AB_NEGATIVO'">AB-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'O_NEGATIVO'">0-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'B_POSITIVO'">B+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'A_POSITIVO'">A+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'AB_POSITIVO'">AB+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'O_POSITIVO'">O+</span>
         </div>
         <div class="campo">
           <label>CEP:</label>

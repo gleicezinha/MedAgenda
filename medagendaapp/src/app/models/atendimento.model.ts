@@ -2,7 +2,6 @@ import { Paciente } from './paciente.model';
 import { Medico } from './medico.model';
 import { EAtendimento } from './eatendimento.model';
 import { EStatus } from './estatus.model';
-import{ Prontuario } from './prontuario.model';
 
 
 export type Atendimento = {
