@@ -16,18 +16,29 @@ export class EspecialidadeService implements ICrudService<Especialidade> {
   apiUrl: string = environment.API_URL + '/especialidade';
 
   get(termoBusca?: string): Observable<Especialidade[]> {
-    throw new Error('Method not implemented.');
+    let url = this.apiUrl + '/consultar-todos';
+    if (termoBusca){
+      url += '?termoBusca=' + termoBusca;
+    }
+    return this.http.get<Especialidade[]>(url);
   }
 
   getById(id: number): Observable<Especialidade> {
-    throw new Error('Method not implemented.');
+    return this.http.get<Especialidade>(`${this.apiUrl}/${id}`); // Corrigido para usar o HttpClient
   }
 
   save(objeto: Especialidade): Observable<Especialidade> {
-    throw new Error('Method not implemented.');
+    let url = this.apiUrl;
+    if (objeto.id) {
+      url += '/atualizar';
+      return this.http.put<Especialidade>(url, objeto); // Corrigido para usar o HttpClient
+    } else {
+      url += '/inserir';
+      return this.http.post<Especialidade>(url, objeto); // Corrigido para usar o HttpClient
+    }
   }
   
   delete(id: number): Observable<void> {
-    throw new Error('Method not implemented.');
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`); // Corrigido para usar o HttpClient  
   }
 }
