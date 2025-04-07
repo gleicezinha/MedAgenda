@@ -36,7 +36,16 @@
       </div>
       <div class="campo">
         <label for="tipoSanguineo">Tipo Sanguíneo:</label>
-        <input id="tipoSanguineo" formControlName="tipoSanguineo" type="text" />
+        <select id="tipoSanguineo" formControlName="tipoSanguineo">
+            <option value="A_POSITIVO">A+</option>
+            <option value="A_NEGATIVO">A-</option>
+            <option value="B_POSITIVO">B+</option>
+            <option value="B_NEGATIVO">B-</option>
+            <option value="AB_POSITIVO">AB+</option>
+            <option value="AB_NEGATIVO">AB-</option>
+            <option value="O_POSITIVO">O+</option>
+            <option value="O_NEGATIVO">O-</option>
+        </select>
       </div>
       <div class="campo">
         <label for="cep">CEP:</label>
