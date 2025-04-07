@@ -63,7 +63,7 @@ export class PacienteFormComponent implements OnInit {
       cep: ['', Validators.required],
       bairro: ['', Validators.required],
       endereco: ['', Validators.required],
-      uf: ['', Validators.required],
+      estado: ['', Validators.required],
     });
 
     const id = this.route.snapshot.queryParamMap.get('id');
