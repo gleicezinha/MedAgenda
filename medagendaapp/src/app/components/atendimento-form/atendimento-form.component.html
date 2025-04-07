@@ -21,8 +21,12 @@
 
       </div>
       <div class="campo">
-        <label for="atendente">Atendente:</label>
-        <input id="atendente" formControlName="atendente" type="text" />
+        <label for="paciente">Paciente:</label>
+        <select id="paciente" formControlName="paciente" [compareWith]="compararPacientes">
+          <option *ngFor="let paciente of pacientes" [ngValue]="paciente">
+            {{ paciente.nomeCompleto }}
+          </option>
+        </select>
       </div>
       <div class="campo">
         <label for="especialidade">Especialidade:</label>
@@ -40,14 +44,7 @@
           </option>
         </select>
       </div>
-      <div class="campo">
-        <label for="paciente">Paciente:</label>
-        <select id="paciente" formControlName="paciente" [compareWith]="compararPacientes">
-          <option *ngFor="let paciente of pacientes" [ngValue]="paciente">
-            {{ paciente.nomeCompleto }}
-          </option>
-        </select>
-      </div>
+
     </div>
 
     <div class="botoes">
