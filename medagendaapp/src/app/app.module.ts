@@ -34,7 +34,6 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     UsuarioComponent,
