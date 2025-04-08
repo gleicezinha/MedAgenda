@@ -1,8 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Atendente } from '../../models/atendente.model';
-import { AtendenteService } from '../../services/atendente.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-atendente-form',
   standalone: false,
@@ -11,14 +10,6 @@ import { AtendenteService } from '../../services/atendente.service';
 })
 export class AtendenteFormComponent implements OnInit {
   atendenteForm!: FormGroup;
-  atendentes: Atendente[] = [];
-  idEditando: number | null = null;
-
-  constructor(
-    private atendenteService: AtendenteService,
-    private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute) {}
 
   ufs = [
     { sigla: 'AC', nome: 'Acre' },
@@ -50,56 +41,34 @@ export class AtendenteFormComponent implements OnInit {
     { sigla: 'TO', nome: 'Tocantins' },
   ];
 
-
+  constructor(
+    private fb: FormBuilder,
+    private router: Router)
+  {}
 
   ngOnInit(): void {
     this.atendenteForm = this.fb.group({
-      nomeCompleto: ['', Validators.required],
+      nome: ['', Validators.required],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       especialidade: ['', Validators.required],
-      telefone: ['', Validators.required],
+      contato: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       cep: ['', Validators.required],
       bairro: ['', Validators.required],
       endereco: ['', Validators.required],
-      estado: ['', Validators.required],
+      uf: ['', Validators.required],
     });
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id) {
-      this.atendenteService.getById(+id).subscribe({
-        next: (res: Atendente) => {
-          this.atendenteForm.patchValue(res);
-        },
-        error: (err) => {
-          console.error('Erro ao buscar atendente:', err.message);
-        },
-      });
-    }
-
   }
 
   onSubmit(): void {
     if (this.atendenteForm.valid) {
-      const atendente: Atendente = this.atendenteForm.value;
-      if (this.idEditando) {
-        atendente.id = this.idEditando;
-      }
-      this.atendenteService.save(atendente).subscribe({
-        next:(atendenteSalvo: Atendente) => {
-          console.log('Atendente salvo:', atendenteSalvo);
-          this.router.navigate(['/atendente-usuario']);
-        },
-        error: (err) => {
-          console.error('Erro ao salvar atendente:', err.message);
-        }
-      });
+      console.log('Atendente cadastrado:', this.atendenteForm.value);
     } else {
       console.log('Formulário inválido');
     }
   }
 
   onCancel(): void {
-    this.router.navigate(['/atendente-usuario']);
-    this.atendenteForm.reset();
+    this.router.navigate(['/atendimento-form']);
   }
 }
