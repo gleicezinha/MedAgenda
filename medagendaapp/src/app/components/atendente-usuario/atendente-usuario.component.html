@@ -1,21 +1,16 @@
-<div class="usuario-container" style="padding: 20px; font-family: Arial, sans-serif;">
-
-    <!-- Barra de busca -->
-    <div class="header" style="margin-bottom: 20px;">
-      <input
-        type="text"
-        placeholder="Buscar atendente"
-        style="padding: 8px; width: 100%; max-width: 400px; font-size: 16px;"
-      />
+<div class="usuario-container">
+    <div class="header">
+        <mat-form-field appearance="outline" class="search-field">
+            <button mat-icon-button matPrefix class="search-button">
+                <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />
+            </button>
+            <input matInput placeholder="Buscar Atendente ou Admin" />
+        </mat-form-field>
     </div>
-  
-    <!-- Botão de cadastro -->
-    <div class="add-button-container" style="margin-bottom: 20px;">
-      <button
-        style="padding: 10px 16px; background-color: #1976d2; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;"
-      >
-        Cadastrar Atendente
-      </button>
+    <div class="add-button-container">
+        <button mat-raised-button color="primary" class="add-button" (click)="adicionarAtendente()">
+            Adicionar Atendente
+        </button>
     </div>
     <h2 class="title">Atendentes</h2>
     <table mat-table [dataSource]="atendentes" class="mat-elevation-z8">
@@ -39,6 +34,11 @@
             <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
         </ng-container>
 
+        <ng-container matColumnDef="especialidade">
+            <th mat-header-cell *matHeaderCellDef> Especialidade </th>
+            <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
+        </ng-container>
+
         <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let usuario">
@@ -54,5 +54,4 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  </div>
-  
+</div>
