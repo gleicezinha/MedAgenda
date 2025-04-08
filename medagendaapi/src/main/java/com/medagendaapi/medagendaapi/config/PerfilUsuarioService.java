@@ -19,7 +19,9 @@ public class PerfilUsuarioService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
         var usuario = servico.buscaPorCpf(cpf);
+        //System.out.println(cpf);
         if(usuario == null){
+            //System.out.println("perfil service");
             throw new UsernameNotFoundException("Usuário não encontrado com o CPF: " + cpf);
         }
         return new PerfilUsuario(usuario);

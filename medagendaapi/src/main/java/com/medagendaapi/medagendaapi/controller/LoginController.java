@@ -36,14 +36,12 @@ public class LoginController {
 
     @PostMapping("/autenticacao")
     public ResponseEntity<String> autenticar(@RequestBody Usuario usuario) {
-        // System.out.println(usuario.getCpf());
+        //System.out.println(usuario.getCpf());
         var loginToken = new UsernamePasswordAuthenticationToken(usuario.getCpf(), usuario.getSenha());
         var auth = authManeger.authenticate(loginToken);
         PerfilUsuario principal = (PerfilUsuario) auth.getPrincipal();
-        var usuarioAutenticado = usuarioService.buscaPorCpf(principal.getCpf());
-
+        Usuario usuarioAutenticado = usuarioService.buscaPorCpf(principal.getCpf());
         var token = tokenService.criarToken(usuarioAutenticado);
-
         return ResponseEntity.ok(token);
     }
 

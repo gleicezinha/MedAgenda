@@ -41,7 +41,6 @@ public class TokenService {
     }
 
     public String criarToken(Usuario usuario){
-
         var secret_crypt = Algorithm.HMAC256(secret);
         var token = JWT.create()
                     .withIssuer("MEDAGENDA")

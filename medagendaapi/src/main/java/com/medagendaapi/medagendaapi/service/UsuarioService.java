@@ -39,6 +39,7 @@ public class UsuarioService implements ICrudService<Usuario> {
 
     public Usuario buscaPorCpf(String cpf) {
         Usuario registro = repo.buscaPorCpf(cpf);
+        
         return registro;
     }
 
