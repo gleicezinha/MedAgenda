@@ -33,9 +33,8 @@ public class Atendimento implements Serializable {
     @ManyToOne
     private Paciente paciente;
 
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private EStatus status;
+    private EStatus status = EStatus.AGENDADO;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
