@@ -5,7 +5,12 @@
       <button mat-icon-button matPrefix class="search-button">
         <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />
       </button>
-      <input matInput placeholder="Buscar Profissional" />
+      <input
+        matInput
+        placeholder="Buscar Profissional"
+        [(ngModel)]="termoBusca"
+        (input)="buscarProfissionais()"
+      />
     </mat-form-field>
   </div>
   <div class="add-button-container">
@@ -16,7 +21,7 @@
 
   <h2 class="title">Profissionais</h2>
 
-  <table mat-table [dataSource]="profissionais" class="mat-elevation-z8">
+  <table mat-table [dataSource]="profissionaisFiltrados" class="mat-elevation-z8">
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef> Nome </th>
       <td mat-cell *matCellDef="let profissional"> {{ profissional.nomeCompleto }} </td>

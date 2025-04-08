@@ -39,7 +39,6 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
     ResetPasswordComponent,
     UsuarioComponent,
     UsuarioFormComponent,
-    ProfissionaisComponent,
     AtendimentoComponent,
     AtendimentoFormComponent,
     PacienteComponent,
