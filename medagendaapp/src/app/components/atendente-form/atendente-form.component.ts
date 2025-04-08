@@ -80,6 +80,6 @@ export class AtendenteFormComponent implements OnInit {
   
 
   onCancel(): void {
-    this.router.navigate(['/atendimento-form']);
+    this.router.navigate(['/atendente-usuario']);
   }
 }
