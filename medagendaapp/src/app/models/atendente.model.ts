@@ -1,6 +1,7 @@
 export type Atendente = {
     id: number;
-    nomeUsuario: string;
+    nomeCompleto: string;
+    especialidadeAtendente: string;
     cpf: string;
     email: string;
     telefone: string;
