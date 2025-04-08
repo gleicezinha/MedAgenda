@@ -21,27 +21,34 @@ export class PacienteComponent implements ICrudList<Paciente>{
     this.get();
   }
 
-  registros: Paciente[] = [];
   termoBuscaAtual: string | undefined = '';
+  registros: Paciente[] = [];
+  registrosFiltrados: Paciente[] = []; 
   
-  get(termoBusca?: string): void {  
+  get(termoBusca?: string): void {
     this.termoBuscaAtual = termoBusca;
     this.servico.get(this.termoBuscaAtual).subscribe({
       next: (resposta: Paciente[]) => {
-        this.registros = resposta;
+        this.registros = resposta; 
+        this.registrosFiltrados = resposta; 
         console.log(this.registros);
-      }
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar pacientes:', erro);
+      },
     });
-    
   }
-    buscarComTermo(termoBusca: string): void {
-      termoBusca = termoBusca.trim().toLowerCase();
-      this.servico.get(termoBusca).subscribe({
-        next: (resposta: Paciente[]) => {
-          this.registros = resposta;
-        }
-      })
-    }
+
+  buscarComTermo(termoBusca: string): void {
+    termoBusca = termoBusca.trim().toLowerCase();
+    this.registrosFiltrados = this.registros.filter(
+      (paciente) =>
+        paciente.nomeCompleto.toLowerCase().startsWith(termoBusca) ||
+        paciente.email.toLowerCase().startsWith(termoBusca) ||
+        paciente.telefone.toLowerCase().startsWith(termoBusca)
+    );
+    console.log('Pacientes filtrados:', this.registrosFiltrados);
+  }
 
   cadastrar(): void {
     this.router.navigate(['/paciente-form']);

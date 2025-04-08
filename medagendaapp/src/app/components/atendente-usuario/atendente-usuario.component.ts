@@ -12,37 +12,58 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-atendente-usuario',
-  imports: [MatTableModule,CommonModule, MatFormFieldModule,
-    MatIconModule, MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatCheckboxModule, MatSelectModule],
+  imports: [
+    MatTableModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    FormsModule,
+  ],
   templateUrl: './atendente-usuario.component.html',
-  styleUrl: './atendente-usuario.component.scss'
+  styleUrl: './atendente-usuario.component.scss',
 })
-export class AtendenteUsuarioComponent implements OnInit{
+export class AtendenteUsuarioComponent implements OnInit {
   atendentes: Atendente[] = [];
+  atendentesFiltrados: Atendente[] = [];
   displayedColumns: string[] = ['nome', 'contato', 'email', 'especialidade', 'acoes'];
+  termoBusca: string = '';
 
-  constructor(
-    private atendenteService: AtendenteService,
-    private router: Router
-    
-  ) {}
+  constructor(private atendenteService: AtendenteService, private router: Router) {}
+
   ngOnInit(): void {
-    this.get();
+    this.carregarAtendentes();
   }
 
-  get(termoBusca?: string): void {
+  carregarAtendentes(): void {
     this.atendenteService.get().subscribe({
       next: (res: Atendente[]) => {
         this.atendentes = res;
-        console.log('Atendentes:', this.atendentes);
+        this.atendentesFiltrados = res; 
+        console.log('Atendentes carregados:', this.atendentes);
       },
       error: (err) => {
         console.error('Erro ao buscar atendentes:', err.message);
-      }
+      },
     });
+  }
+
+  buscarAtendentes(): void {
+    const termo = this.termoBusca.toLowerCase().trim(); 
+    this.atendentesFiltrados = this.atendentes.filter(
+      (atendente) =>
+        atendente.nomeCompleto.toLowerCase().startsWith(termo) 
+    );
+    console.log('Atendentes filtrados:', this.atendentesFiltrados); 
   }
 
   adicionarAtendente(): void {
@@ -53,11 +74,12 @@ export class AtendenteUsuarioComponent implements OnInit{
     if (confirm('Tem certeza que deseja excluir este atendente?')) {
       this.atendenteService.delete(id).subscribe({
         next: () => {
-          this.atendentes = this.atendentes.filter(a => a.id !== id);
+          this.atendentes = this.atendentes.filter((a) => a.id !== id);
+          this.buscarAtendentes(); 
         },
         error: (err) => {
           console.error('Erro ao deletar atendente:', err.message);
-        }
+        },
       });
     }
   }
