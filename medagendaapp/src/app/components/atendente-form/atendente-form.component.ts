@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AtendenteService } from '../../services/atendente.service';
 
 @Component({
   selector: 'app-atendente-form',
@@ -43,32 +44,42 @@ export class AtendenteFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private atendenteService: AtendenteService,
     private router: Router)
   {}
 
   ngOnInit(): void {
     this.atendenteForm = this.fb.group({
-      nome: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
-      especialidade: ['', Validators.required],
-      contato: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      cep: ['', Validators.required],
-      bairro: ['', Validators.required],
-      endereco: ['', Validators.required],
-      uf: ['', Validators.required],
+      nomeCompleto: [''],
+      cpf: [''],
+      especialidadeAtendente: [''],
+      telefone: [''],
+      email: [''],
+      cep: [''],
+      bairro: [''],
+      endereco: [''],
+      estado: [''],
     });
   }
 
   onSubmit(): void {
     if (this.atendenteForm.valid) {
-      console.log('Atendente cadastrado:', this.atendenteForm.value);
+      const atendente = this.atendenteForm.value;
+      this.atendenteService.save(atendente).subscribe({
+        next: () => {
+          console.log('Atendente salvo com sucesso!');
+        },
+        error: (err) => {
+          console.error('Erro ao salvar atendente:', err);
+        }
+      });
     } else {
       console.log('Formulário inválido');
     }
   }
+  
 
   onCancel(): void {
-    this.router.navigate(['/atendimento-form']);
+    this.router.navigate(['/atendente-usuario']);
   }
 }
