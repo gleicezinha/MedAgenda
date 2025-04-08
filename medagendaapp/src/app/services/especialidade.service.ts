@@ -24,21 +24,21 @@ export class EspecialidadeService implements ICrudService<Especialidade> {
   }
 
   getById(id: number): Observable<Especialidade> {
-    return this.http.get<Especialidade>(`${this.apiUrl}/${id}`); // Corrigido para usar o HttpClient
+    return this.http.get<Especialidade>(`${this.apiUrl}/${id}`); 
   }
 
   save(objeto: Especialidade): Observable<Especialidade> {
     let url = this.apiUrl;
     if (objeto.id) {
       url += '/atualizar';
-      return this.http.put<Especialidade>(url, objeto); // Corrigido para usar o HttpClient
+      return this.http.put<Especialidade>(url, objeto); 
     } else {
       url += '/inserir';
-      return this.http.post<Especialidade>(url, objeto); // Corrigido para usar o HttpClient
+      return this.http.post<Especialidade>(url, objeto);
     }
   }
   
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`); // Corrigido para usar o HttpClient  
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
   }
 }

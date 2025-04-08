@@ -24,7 +24,6 @@ import { AtendimentoComponent } from './components/atendimento/atendimento.compo
 import { PacienteComponent } from './components/paciente/paciente.component'; 
 import { PacienteDetalhesComponent } from './components/paciente-detalhes/paciente-detalhes.component'; 
 import { PacienteFormComponent } from './components/paciente-form/paciente-form.component';
-import { ProfissionalFormComponent } from './components/profissional-form/profissional-form.component';
 import { AtendimentoFormComponent } from './components/atendimento-form/atendimento-form.component';
 import { AtendenteFormComponent } from './components/atendente-form/atendente-form.component';
 import { EspecialidadeFormComponent } from './components/especialidade-form/especialidade-form.component';
@@ -41,7 +40,6 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
     UsuarioComponent,
     UsuarioFormComponent,
     ProfissionaisComponent,
-    ProfissionalFormComponent,
     AtendimentoComponent,
     AtendimentoFormComponent,
     PacienteComponent,

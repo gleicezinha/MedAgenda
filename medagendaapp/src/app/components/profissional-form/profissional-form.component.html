@@ -3,8 +3,8 @@
   <form [formGroup]="profissionalForm" (ngSubmit)="save()">
     <div class="form-grid">
       <div class="campo">
-        <label for="nome">Nome:</label>
-        <input id="nome" formControlName="nome" type="text" />
+        <label for="nomeCompleto">Nome:</label>
+        <input id="nomeCompleto" formControlName="nomeCompleto" type="text" />
       </div>
       <div class="campo">
         <label for="cpf">CPF:</label>
@@ -12,11 +12,15 @@
       </div>
       <div class="campo">
         <label for="especialidade">Especialidade:</label>
-        <input id="especialidade" formControlName="especialidade" type="text" />
+        <select id="especialidade" formControlName="especialidade">
+          <option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
+            {{ especialidade.nome }}
+          </option>
+        </select>
       </div>
       <div class="campo">
-        <label for="contato">Contato:</label>
-        <input id="contato" formControlName="contato" type="text" />
+        <label for="telefone">Contato:</label>
+        <input id="telefone" formControlName="telefone" type="text" />
       </div>
       <div class="campo">
         <label for="registroConselho">Registro do Conselho:</label>
