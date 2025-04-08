@@ -34,7 +34,7 @@ export class EspecialidadeService implements ICrudService<Especialidade> {
       return this.http.put<Especialidade>(url, objeto); 
     } else {
       url += '/inserir';
-      return this.http.post<Especialidade>(url, objeto);
+      return this.http.post<Especialidade>(url, objeto); 
     }
   }
   

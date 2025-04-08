@@ -4,10 +4,10 @@
     <div class="content">
       <div class="left-panel">
         <mat-form-field appearance="outline" class="search-field">
-          <button mat-icon-button matPrefix class="search-button">
-            <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />          
-          </button>
-          <input matInput placeholder="Buscar Especialidade" />
+            <button mat-icon-button matPrefix class="search-button">
+                <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />
+            </button>
+            <input matInput placeholder="Buscar Especialidade" [(ngModel)]="termoBuscaAtual" (input)="get(termoBuscaAtual)" />
         </mat-form-field>
         <div class="add-button-container">
           <button mat-raised-button color="primary" class="add-button" (click)="cadastrar()">
