@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./paciente.component.scss'],
 })
 export class PacienteComponent implements ICrudList<Paciente>{
-  
+  termoBusca: string = '';
   constructor(
     private servico: PacienteService,
     private router: Router
@@ -34,16 +34,29 @@ export class PacienteComponent implements ICrudList<Paciente>{
     });
     
   }
+    buscarComTermo(termoBusca: string): void {
+      termoBusca = termoBusca.trim().toLowerCase();
+      this.servico.get(termoBusca).subscribe({
+        next: (resposta: Paciente[]) => {
+          this.registros = resposta;
+        }
+      })
+    }
 
   cadastrar(): void {
     this.router.navigate(['/paciente-form']);
   }
-
+  editar(paciente: Paciente): void {
+    this.router.navigate(['/paciente-form'], { queryParams: { id: paciente.id } });
+  }
   delete(id: number): void {
     if(confirm('Deseja realmente EXCLUIR o paciente?')){
       this.servico.delete(id).subscribe({
-        complete: () => {
-          this.get();
+        next: () => {
+          this.get(this.termoBuscaAtual);
+        },
+        error: (erro) => {
+          console.error('Erro ao excluir paciente:', erro);
         }
       });
     }

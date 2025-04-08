@@ -7,7 +7,7 @@
         <button mat-icon-button matPrefix class="search-button">
           <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />        
         </button>
-        <input matInput placeholder="Buscar Pacientes" />
+        <input matInput placeholder="Buscar Pacientes" [(ngModel)]="termoBusca" (input)="buscarComTermo(termoBusca)"[(ngModel)]="termoBusca" (input)="buscarComTermo(termoBusca)" />
       </mat-form-field>
       <div class="add-button-container">
         <button mat-raised-button color="primary" class="add-button" (click)="cadastrar()">
@@ -20,7 +20,13 @@
         <div class="pacientes-list">
             <div class="paciente-item" *ngFor="let paciente of registros; let i = index">
                 <span>{{ paciente.nomeCompleto }}</span>
-                <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">ver prontuário</a>           
+                <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">ver prontuário</a>
+                <span>        <button mat-icon-button color="primary" (click)="editar(paciente)">
+                  <img src="assets/imagens/edit.svg" alt="Editar" class="menu-icon" />
+                </button></span>  
+                <span>        <button mat-icon-button color="warn" (click)="delete(paciente.id)">
+                  <img src="assets/imagens/delete.svg" alt="Excluir" class="menu-icon" />
+                </button></span>         
             </div>
         </div>
     </div>
