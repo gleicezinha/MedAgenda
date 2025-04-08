@@ -3,6 +3,7 @@ package com.medagendaapi.medagendaapi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.medagendaapi.medagendaapi.model.Usuario;
@@ -28,8 +29,17 @@ public class UsuarioService implements ICrudService<Usuario> {
 
     @Override
     public Usuario save(Usuario objeto) {
-        Usuario registro = repo.save(objeto);
-        return registro;
+        if (objeto.getSenha() == null || objeto.getSenha().isBlank()) {
+            var usuario = get(objeto.getId());
+            if (usuario != null) {
+                objeto.setSenha(usuario.getSenha());
+            }
+        } else {
+            var passEncoder = new BCryptPasswordEncoder();
+            var senhaCriptografada = passEncoder.encode(objeto.getSenha());
+            objeto.setSenha(senhaCriptografada);
+        }
+        return repo.save(objeto);
     }
 
     @Override
