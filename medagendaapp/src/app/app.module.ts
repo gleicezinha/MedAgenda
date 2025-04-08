@@ -46,7 +46,6 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
     PacienteFormComponent, 
     PacienteDetalhesComponent,
     AtendenteFormComponent,
-    EspecialidadeFormComponent,
     CalendarioComponent
   ],
   imports: [

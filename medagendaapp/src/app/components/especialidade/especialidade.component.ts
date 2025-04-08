@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-especialidade',
@@ -15,7 +16,9 @@ import { CommonModule } from '@angular/common';
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
-        MatButtonModule],
+        MatButtonModule,
+        FormsModule
+    ],
     templateUrl: './especialidade.component.html',
     styleUrls: ['./especialidade.component.scss'],
 })
@@ -34,14 +37,25 @@ export class EspecialidadeComponent implements ICrudList<Especialidade> {
     }
 
     get(termoBusca?: string): void {
-        this.termoBuscaAtual = termoBusca;
-        this.servico.get(this.termoBuscaAtual).subscribe({
+        this.termoBuscaAtual = termoBusca?.toLowerCase(); 
+        this.servico.get().subscribe({
             next: (resposta: Especialidade[]) => {
-                this.registros = resposta;
+                if (this.termoBuscaAtual) {
+                    this.registros = resposta.filter(especialidade =>
+                        especialidade.nome.toLowerCase().startsWith(this.termoBuscaAtual!)
+                    );
+                } else {
+                    this.registros = resposta;
+                }
                 console.log(this.registros);
+            },
+            error: (err) => {
+                console.error('Erro ao buscar especialidades:', err);
             }
         });
     }
+
+    
 
     cadastrar(): void {
         this.router.navigate(['/especialidade-form']);
