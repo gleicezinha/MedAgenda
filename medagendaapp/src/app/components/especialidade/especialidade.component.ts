@@ -36,6 +36,10 @@ export class EspecialidadeComponent implements ICrudList<Especialidade> {
         this.get();
     }
 
+    editar(especialidade: Especialidade): void {
+      this.router.navigate(['/especialidade-form'], { queryParams: { id: especialidade.id } });
+    }
+
     get(termoBusca?: string): void {
         this.termoBuscaAtual = termoBusca?.toLowerCase(); 
         this.servico.get().subscribe({

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Especialidade } from '../models/especialidade.model';
 import { ICrudService } from './i-crud-service';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -28,17 +28,25 @@ export class EspecialidadeService implements ICrudService<Especialidade> {
   }
 
   save(objeto: Especialidade): Observable<Especialidade> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+    });
+  
     let url = this.apiUrl;
     if (objeto.id) {
       url += '/atualizar';
-      return this.http.put<Especialidade>(url, objeto); 
+      return this.http.put<Especialidade>(url, objeto, { headers });
     } else {
       url += '/inserir';
-      return this.http.post<Especialidade>(url, objeto); 
+      return this.http.post<Especialidade>(url, objeto, { headers });
     }
   }
   
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
+    delete(id: number): Observable<void> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+    });
+  
+    return this.http.delete<void>(`${this.apiUrl}/remover/${id}`, { headers });
   }
 }

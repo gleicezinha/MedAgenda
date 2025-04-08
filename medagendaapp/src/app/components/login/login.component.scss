@@ -6,7 +6,7 @@
   max-width: 400px;
   padding: 20px;
   border-radius: 8px;
-  background-color: #0057ff;
+  background-color: #0057ff !important;
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin: auto;
@@ -14,6 +14,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.forgot-password-link {
+  cursor: pointer;
+}
+.forgot-password-link:hover {
+  color: #0d47a1; 
 }
 
 .menu-icon {

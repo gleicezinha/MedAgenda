@@ -5,18 +5,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Usuario } from '../../models/usuario.model';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCard } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
   imports: [
     ReactiveFormsModule,
     MatCheckboxModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCard
   ],
   styleUrls: ['./login.component.scss']
 })
@@ -27,7 +31,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.formularioLogin = this.fb.group({
       cpf: ['', [Validators.required]],
@@ -51,6 +56,10 @@ export class LoginComponent {
       this.erro = 'Erro ao realizar login';
       console.error(e);
     }
+  }
+
+  irParaEsqueciSenha(): void {
+    this.router.navigate(['/forgot-password']); 
   }
 
 }
