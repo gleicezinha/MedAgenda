@@ -5,11 +5,11 @@
     <div class="form-grid">
       <div class="campo">
         <label for="nome">Nome:</label>
-        <input id="nome" formControlName="nome" type="text" />
+        <input matInput id="nome" formControlName="nomeCompleto" type="text" />
       </div>
       <div class="campo">
         <label for="cpf">CPF:</label>
-        <input id="cpf" formControlName="cpf" type="text" />
+        <input matInput id="cpf" formControlName="cpf" type="text" />
       </div>
       <div class="campo">
         <label for="especialidade">Especialidade:</label>
@@ -21,29 +21,29 @@
       </div>
       <div class="campo">
         <label for="contato">Contato:</label>
-        <input id="contato" formControlName="contato" type="text" />
+        <input matInput id="telefone" formControlName="telefone" type="text" />
       </div>
       <div class="campo">
         <label for="email">E-mail:</label>
-        <input id="email" formControlName="email" type="email" />
+        <input matInput id="email" formControlName="email" type="email" />
       </div>
       <div class="campo">
         <label for="cep">CEP:</label>
-        <input id="cep" formControlName="cep" type="text" />
+        <input matInput id="cep" formControlName="cep" type="text" />
       </div>
       <div class="campo">
         <label for="bairro">Bairro:</label>
-        <input id="bairro" formControlName="bairro" type="text" />
+        <input matInput id="bairro" formControlName="bairro" type="text" />
       </div>
       <div class="campo">
         <label for="uf">UF:</label>
-        <select id="uf" formControlName="uf">
-          <option *ngFor="let uf of ufs" [value]="uf.sigla">{{ uf.nome }}</option>
+        <select id="estado" formControlName="estado">
+          <option *ngFor="let estado of ufs" [value]="estado.sigla">{{ estado.nome }}</option>
         </select>
       </div>
       <div class="campo">
         <label for="endereco">Endereço:</label>
-        <input id="endereco" formControlName="endereco" type="text" />
+        <input matInput id="endereco" formControlName="endereco" type="text" />
       </div>
     </div>
 
