@@ -38,10 +38,10 @@
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let usuario">
                 <button mat-icon-button color="primary" (click)="editarAtendente(usuario.id)">
-                    <mat-icon>edit</mat-icon>
+                    <img src="assets/imagens/edit.svg" alt="Editar" class="menu-icon" />
                 </button>
                 <button mat-icon-button color="warn" (click)="deletarAtendente(usuario.id)">
-                    <mat-icon>delete</mat-icon>
+                    <img src="assets/imagens/delete.svg" alt="Excluir" class="menu-icon" />
                 </button>
             </td>
         </ng-container>
