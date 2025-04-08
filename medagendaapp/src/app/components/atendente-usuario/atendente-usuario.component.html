@@ -16,7 +16,7 @@
     <table mat-table [dataSource]="atendentes" class="mat-elevation-z8">
         <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
-            <td mat-cell *matCellDef="let atendente"> {{ atendente.nomecompleto }} </td>
+            <td mat-cell *matCellDef="let atendente"> {{ atendente.nomeCompleto }} </td>
         </ng-container>
 
         <ng-container matColumnDef="contato">
@@ -29,14 +29,9 @@
             <td mat-cell *matCellDef="let atendente"> {{ atendente.email }} </td>
         </ng-container>
 
-        <ng-container matColumnDef="papel">
-            <th mat-header-cell *matHeaderCellDef> Especialidade </th>
-            <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
-        </ng-container>
-
         <ng-container matColumnDef="especialidade">
-            <th mat-header-cell *matHeaderCellDef> Especialidade </th>
-            <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
+            <th mat-header-cell *matHeaderCellDef> Função </th>
+            <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendente }} </td>
         </ng-container>
 
         <ng-container matColumnDef="acoes">
