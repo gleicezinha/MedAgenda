@@ -12,8 +12,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./atendimento.component.scss'],
 })
 export class AtendimentoComponent implements OnInit {
-  displayedColumns: string[] = ['dataDeAtendimento', 'horarioDeAtendimento', 'medico', 'paciente', 'tipoDeAtendimento', 'acoes'];
+  displayedColumns: string[] = ['dataDeAtendimento', 'horarioDeAtendimento','status', 'medico', 'paciente', 'tipoDeAtendimento', 'acoes'];
   atendimentos: Atendimento[] = [];
+  termoBusca: string = '';
 
   constructor(
     private atendimentoService: AtendimentoService, 
@@ -41,6 +42,29 @@ export class AtendimentoComponent implements OnInit {
 
   editar(atendimento: Atendimento): void {
     this.router.navigate(['/atendimento-form'], { queryParams: { id: atendimento.id } });
+  }
+
+  buscarComTermo(termoBusca: string): void {
+    termoBusca = termoBusca.trim().toLowerCase();
+    this.atendimentoService.get(termoBusca).subscribe({
+      next: (resposta: Atendimento[]) => {
+        this.atendimentos = resposta;
+      }
+    })
+  }
+
+  excluir(id: number): void {
+    if(confirm("Deseja excluir esse atendimento?")) {
+      this.atendimentoService.delete(id).subscribe({
+        next: () => {
+          this.carregarAtendimentos();
+        },
+        error(err) {
+          console.error('Erro ao excluir atendimento:', err);
+          alert('Erro ao excluir atendimento. Verifique se o atendimento não está vinculado a um paciente ou médico.');
+        }    
+      });
+    }
   }
   
 }
