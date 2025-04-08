@@ -11,9 +11,9 @@ import { HttpClient } from '@angular/common/http';
 export class AtendenteService  implements ICrudService<Atendente>{
 
   constructor(private http: HttpClient) { }
-  apiUrl: string = environment.API_URL + '/config/atendente';
+  apiUrl: string = environment.API_URL + '/atendente';
   get(termoBusca?: string): Observable<Atendente[]> {
-        let url = this.apiUrl + '/consultar/todos';
+        let url = this.apiUrl + '/consultar-todos';
         if (termoBusca) {
           url += '?termoBusca=' + termoBusca;
         }

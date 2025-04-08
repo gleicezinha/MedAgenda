@@ -24,18 +24,25 @@ export class AtendenteUsuarioComponent implements OnInit{
     
   ) {}
   ngOnInit(): void {
+    this.get();
+  }
+
+  get(termoBusca?: string): void {
     this.atendenteService.get().subscribe({
       next: (res: Atendente[]) => {
         this.atendentes = res;
+        console.log('Atendentes:', this.atendentes);
       },
       error: (err) => {
         console.error('Erro ao buscar atendentes:', err.message);
       }
     });
   }
+
   adicionarAtendente(): void {
     this.router.navigate(['/atendente-form']);
   }
+
   deletarAtendente(id: number): void {
     if (confirm('Tem certeza que deseja excluir este atendente?')) {
       this.atendenteService.delete(id).subscribe({
@@ -48,6 +55,7 @@ export class AtendenteUsuarioComponent implements OnInit{
       });
     }
   }
+
   editarAtendente(id: number): void {
     this.router.navigate(['/atendente-form'], { queryParams: { id } });
   }
