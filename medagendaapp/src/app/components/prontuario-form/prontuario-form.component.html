@@ -1,0 +1,49 @@
+<div class="prontuario-form-container">
+  <h1 class="titulo">Formulário de Prontuário</h1>
+
+  <form [formGroup]="prontuarioForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="dataAtendimento">Dia do Atendimento:</label>
+        <input matInput id="dataAtendimento" formControlName="dataAtendimento" type="date" />
+      </div>
+      <div class="campo">
+        <label for="tipoAtendimento">Tipo de Atendimento:</label>
+        <select id="tipoAtendimento" formControlName="tipoAtendimento">
+          <option value="CONSULTA">Consulta</option>
+          <option value="EXAME">Exame</option>
+          <option value="RETORNO">Retorno</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="doencasCognitivas">Doenças Cognitivas?</label>
+        <input matInput id="doencasCognitivas" formControlName="doencasCognitivas" type="text" />
+      </div>
+      <div class="campo">
+        <label for="alergias">Tem alguma alergia?</label>
+        <input matInput id="alergias" formControlName="alergias" type="text" />
+      </div>
+      <div class="campo">
+        <label for="usaRemedios">Usa algum remédio?</label>
+        <input matInput id="usaRemedios" formControlName="usaRemedios" type="text" />
+      </div>
+      <div class="campo">
+        <label for="problemaRelatado">Problema relatado:</label>
+        <input matInput id="problemaRelatado" formControlName="problemaRelatado" type="text" />
+      </div>
+      <div class="campo">
+        <label for="descricao">Descrição:</label>
+        <textarea matInput id="descricao" formControlName="descricao"></textarea>
+      </div>
+      <div class="campo">
+        <label for="prescricao">Prescrição:</label>
+        <textarea matInput id="prescricao" formControlName="prescricao"></textarea>
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
