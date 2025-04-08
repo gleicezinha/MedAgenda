@@ -60,8 +60,8 @@
         <input id="endereco" formControlName="endereco" type="text" />
       </div>
         <div class="campo">
-            <label for="uf">UF:</label>
-            <select id="uf" formControlName="uf">
+            <label for="estado">UF:</label>
+            <select id="uf" formControlName="estado">
                 <option *ngFor="let uf of ufs" [value]="uf.sigla">{{ uf.nome }}</option>
             </select>
         </div>

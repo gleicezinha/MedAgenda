@@ -92,7 +92,10 @@ public class Seguranca {
         http.authorizeHttpRequests(
             authorize -> authorize
                 .requestMatchers("/autenticacao").permitAll()
-                .anyRequest().permitAll()
+                .requestMatchers(HttpMethod.GET, "/").permitAll()
+                .requestMatchers("/prontuario/**").hasAnyRole("MEDICO, ADMIN")
+                //.requestMatchers(HttpMethod.POST, "/paciente/inserir").hasAnyRole("MEDICO", "ADMIN", "ATENDENTE")
+                .anyRequest().authenticated()
         );
 
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
