@@ -28,19 +28,19 @@
           </option>
         </select>
       </div>
-      <div class="campo">
+      <!-- <div class="campo">
         <label for="especialidade">Especialidade:</label>
         <select id="especialidade" formControlName="especialidade">
           <option *ngFor="let especialidade of especialidades" [value]="especialidade">
             {{ especialidade }}
           </option>
         </select>
-      </div>
+      </div> -->
       <div class="campo">
         <label for="medico">Profissional:</label>
         <select id="profissional" formControlName="medico" [compareWith]="compararMedicos">
           <option *ngFor="let profissional of profissionais" [ngValue]="profissional">
-            {{ profissional.nomeCompleto }}
+            {{ profissional.nomeCompleto }} | Especialidade: {{profissional.especialidade.nome}}
           </option>
         </select>
       </div>
