@@ -6,11 +6,17 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-atendente-usuario',
-  imports: [MatTableModule,    CommonModule, MatFormFieldModule,
-    MatIconModule],
+  imports: [MatTableModule,CommonModule, MatFormFieldModule,
+    MatIconModule, MatButtonModule, MatToolbarModule, MatCardModule, MatInputModule, MatCheckboxModule, MatSelectModule],
   templateUrl: './atendente-usuario.component.html',
   styleUrl: './atendente-usuario.component.scss'
 })
