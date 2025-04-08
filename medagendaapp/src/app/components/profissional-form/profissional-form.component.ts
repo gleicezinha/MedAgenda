@@ -1,16 +1,20 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MedicoService } from '../../services/medico.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Medico } from '../../models/medico.model';
+import { Especialidade } from '../../models/especialidade.model';
+import { EspecialidadeService } from '../../services/especialidade.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profissional-form',
-  standalone: false,
+  standalone: true,
   templateUrl: './profissional-form.component.html',
-  styleUrls: ['./profissional-form.component.scss']
+  styleUrls: ['./profissional-form.component.scss'],
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class ProfissionalFormComponent implements OnInit {
   profissionalForm!: FormGroup;
@@ -43,21 +47,23 @@ export class ProfissionalFormComponent implements OnInit {
     { sigla: 'SE', nome: 'Sergipe' },
     { sigla: 'TO', nome: 'Tocantins' }
   ];
+  especialidades: Especialidade[] = []; 
   idEditando: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private medicoService: MedicoService,
+    private especialidadeService: EspecialidadeService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.profissionalForm = this.fb.group({
-      nome: ['', Validators.required],
+      nomeCompleto: ['', Validators.required],
       cpf: [''],
-      especialidade: [''],
-      contato: [''],
+      especialidade: ['', Validators.required], 
+      telefone: [''],
       registroConselho: [''],
       email: ['', [Validators.email]],
       cep: [''],
@@ -66,15 +72,17 @@ export class ProfissionalFormComponent implements OnInit {
       endereco: ['']
     });
 
+    this.loadEspecialidades(); 
+
     const idParam = this.route.snapshot.queryParamMap.get('id');
     if (idParam) {
       this.idEditando = +idParam;
       this.medicoService.getById(this.idEditando).subscribe((res: Medico) => {
         this.profissionalForm.patchValue({
-          nome: res.nomeCompleto,
+          nomeCompleto: res.nomeCompleto,
           cpf: res.cpf,
-          especialidade: res.especialidade.nome,
-          contato: res.telefone,
+          especialidade: res.especialidade.id, 
+          telefone: res.telefone,
           registroConselho: res.registroConselho,
           email: res.email,
           cep: res.cep,
@@ -86,11 +94,38 @@ export class ProfissionalFormComponent implements OnInit {
     }
   }
 
+  loadEspecialidades(): void {
+    this.especialidadeService.get().subscribe({
+      next: (data: Especialidade[]) => {
+        this.especialidades = data;
+        console.log('Especialidades carregadas:', this.especialidades);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Erro ao carregar especialidades:', err.message);
+      }
+    });
+  }
+
   save(): void {
     if (this.profissionalForm.valid) {
       const profissional: Medico = this.profissionalForm.value;
-      if (this.idEditando) profissional.id = this.idEditando;
-
+  
+      const selectedEspecialidade = this.especialidades.find(
+        e => e.id === +this.profissionalForm.value.especialidade 
+      );
+      if (!selectedEspecialidade) {
+        console.error('Especialidade selecionada não encontrada!');
+        return; 
+      }
+  
+      profissional.especialidade = { id: selectedEspecialidade.id, nome: selectedEspecialidade.nome };
+  
+      if (this.idEditando) {
+        profissional.id = this.idEditando;
+      }
+  
+      console.log('Dados enviados:', JSON.stringify(profissional, null, 2)); 
+  
       this.medicoService.save(profissional).subscribe({
         next: () => {
           console.log('Profissional salvo com sucesso!');
