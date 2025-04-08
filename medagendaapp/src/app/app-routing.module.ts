@@ -17,6 +17,7 @@ import { EspecialidadeFormComponent } from './components/especialidade-form/espe
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { AtendenteUsuarioComponent } from './components/atendente-usuario/atendente-usuario.component';
+import { ProntuarioFormComponent } from './components/prontuario-form/prontuario-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'atendimento-form', component: AtendimentoFormComponent},
   { path: 'atendente-form', component: AtendenteFormComponent},
   { path: 'especialidade', component: EspecialidadeComponent},
+  {path: 'prontuario-form', component: ProntuarioFormComponent},
   { path: 'especialidade-form', component: EspecialidadeFormComponent},
   { path: 'calendario', component: CalendarioComponent},
   { path: '**', redirectTo: 'login' },

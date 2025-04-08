@@ -1,7 +1,7 @@
 <div class="atendente-form-container">
   <h1 class="titulo">Formulário de Atendente</h1>
 
-  <form [formGroup]="atendenteForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="atendenteForm" (ngSubmit)="save()">
     <div class="form-grid">
       <div class="campo">
         <label for="nome">Nome:</label>
@@ -13,10 +13,10 @@
       </div>
       <div class="campo">
         <label for="especialidade">Especialidade:</label>
-        <select id="especialidade" formControlName="especialidade">
-          <option value="Recepcionista">Recepcionista</option>
-          <option value="Secretário(a)">Secretário(a)</option>
-          <option value="Assistente Administrativo">Assistente Administrativo</option>
+        <select id="especialidade" formControlName="especialidadeAtendente">
+          <option value="RECEPCIONISTA">Recepcionista</option>
+          <option value="SECRETARIO">Secretário(a)</option>
+          <option value="ASSISTENTE_ADMINISTRATIVO">Assistente Administrativo</option>
         </select>
       </div>
       <div class="campo">
@@ -49,7 +49,7 @@
 
     <div class="botoes">
       <button type="submit" class="btn-salvar">Salvar</button>
-      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
     </div>
   </form>
 </div>
