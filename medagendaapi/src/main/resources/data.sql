@@ -1,7 +1,8 @@
 INSERT INTO usuario (nome_usuario, senha, email, telefone, cpf, ativo, papel)
 VALUES 
-('admin', 'senha123', 'admin@email.com', '(11) 99999-9999', '12345678900', true, 'ADMIN');
-('admin2', 'senha123', 'admin@email.com', '(11) 99999-9999', '12345678900', true, 'ADMIN');
+('admin', 'senha123', 'admin@email.com', '(11) 99999-9999', '12345678901', true, 'ADMIN'),
+('admin2', 'senha123', 'admin2@email.com', '(11) 99999-9999', '12345678902', true, 'ADMIN');
+
 
 
 INSERT INTO especialidade (id, nome)
