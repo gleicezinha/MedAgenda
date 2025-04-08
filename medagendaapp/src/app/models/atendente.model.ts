@@ -5,7 +5,7 @@ export type Atendente = {
     cpf: string;
     email: string;
     telefone: string;
+    estado: string;
     senha: string;
-    papel: string;
     ativo: boolean;
 }
