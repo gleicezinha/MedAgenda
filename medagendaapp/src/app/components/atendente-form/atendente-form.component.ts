@@ -54,10 +54,10 @@ export class AtendenteFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.atendenteForm = this.fb.group({
-      nome: ['', Validators.required],
+      nomeCompleto: ['', Validators.required],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
       especialidade: ['', Validators.required],
-      contato: ['', Validators.required],
+      telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       cep: ['', Validators.required],
       bairro: ['', Validators.required],

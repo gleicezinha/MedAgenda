@@ -34,6 +34,11 @@
             <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
         </ng-container>
 
+        <ng-container matColumnDef="especialidade">
+            <th mat-header-cell *matHeaderCellDef> Especialidade </th>
+            <td mat-cell *matCellDef="let atendente"> {{ atendente.especialidadeAtendimento }} </td>
+        </ng-container>
+
         <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef> Ações </th>
             <td mat-cell *matCellDef="let usuario">
