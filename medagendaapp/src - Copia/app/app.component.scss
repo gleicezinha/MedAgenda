@@ -1,0 +1,158 @@
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0057ff;
+  color: #ffffff;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.user-info {
+  position: absolute;
+  right: 16px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-end; 
+  color: white;
+  font-size: 16px;
+}
+
+.user-name {
+  font-weight: bold; 
+  font-size: 16px;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #cfcfcf; 
+}
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.hamburger {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%); 
+  z-index: 1100;
+}
+
+.hamburger-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 24px;
+}
+
+.hamburger-inner {
+  background-color: #ffffff; 
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  background-color: #ffffff; 
+}
+
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #ffffff; 
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.app-title mat-icon {
+  margin-right: 8px;
+  color: #ffffff;
+}
+
+.side-menu {
+  position: fixed;
+  top: 64px;
+  left: -500px; 
+  width: 250px;
+  height: calc(100vh - 64px); 
+  background-color: #0057ff; 
+  color: #ffffff;
+  padding: 16px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease; 
+  z-index: 1100; 
+}
+
+.side-menu.open {
+  left: 0; 
+}
+
+.app-content {
+  margin-top: 64px; 
+  z-index: 1000;
+}
+
+.menu-item.mdc-button.mat-mdc-button {
+  color: #ffffff !important;
+  font-weight: bold; 
+}
+::ng-deep .mat-icon.mat-icon-no-color {
+  color: #ffffff !important; 
+}
+
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #6a8cff; 
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: none;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item mat-icon {
+  margin-right: 12px;
+  color: #ffffff; 
+}
+
+::ng-deep .mat-mdc-button-persistent-ripple {
+  color: #ffffff !important; 
+}
+.menu-item:hover {
+  background-color: #02359c; 
+}
+.logo {
+  width: 65px; 
+  height: 60px;
+  margin-right: 8px; 
+  vertical-align: middle; 
+}
+
+.app-content {
+  margin-top: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px);
+  background-color: #ffffff;
+}

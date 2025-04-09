@@ -1,0 +1,75 @@
+<div class="paciente-form-container">
+  <h1 class="titulo">Formulário de Paciente</h1>
+
+  <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="nomeCompleto">Nome:</label>
+        <input id="nome" formControlName="nomeCompleto" type="text" />
+      </div>
+      <div class="campo">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input id="dataNascimento" formControlName="dataNascimento" type="date" />
+      </div>
+      <div class="campo">
+        <label for="cpf">CPF:</label>
+        <input id="cpf" formControlName="cpf" type="text" />
+      </div>
+      <div class="campo">
+        <label for="contato">Contato:</label>
+        <input id="telefone" formControlName="telefone" type="text" />
+      </div>
+      <div class="campo">
+        <label for="contatoEmergencia">Contato de Emergência:</label>
+        <input id="telefoneEmergencia" formControlName="telefoneEmergencia" type="text" />
+      </div>
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input id="email" formControlName="email" type="email" />
+      </div>
+      <div class="campo">
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" formControlName="sexo">
+          <option value="F">Feminino</option>
+          <option value="M">Masculino</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="grupoSanguineo">Tipo Sanguíneo:</label>
+        <select id="grupoSanguineo" formControlName="grupoSanguineo">
+            <option value="A_POSITIVO">A+</option>
+            <option value="A_NEGATIVO">A-</option>
+            <option value="B_POSITIVO">B+</option>
+            <option value="B_NEGATIVO">B-</option>
+            <option value="AB_POSITIVO">AB+</option>
+            <option value="AB_NEGATIVO">AB-</option>
+            <option value="O_POSITIVO">O+</option>
+            <option value="O_NEGATIVO">O-</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="cep">CEP:</label>
+        <input id="cep" formControlName="cep" type="text" />
+      </div>
+      <div class="campo">
+        <label for="bairro">Bairro:</label>
+        <input id="bairro" formControlName="bairro" type="text" />
+      </div>
+      <div class="campo">
+        <label for="endereco">Endereço:</label>
+        <input id="endereco" formControlName="endereco" type="text" />
+      </div>
+        <div class="campo">
+            <label for="estado">UF:</label>
+            <select id="uf" formControlName="estado">
+                <option *ngFor="let uf of ufs" [value]="uf.sigla">{{ uf.nome }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

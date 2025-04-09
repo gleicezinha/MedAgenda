@@ -1,0 +1,55 @@
+<div class="atendente-form-container">
+  <h1 class="titulo">Formulário de Atendente</h1>
+
+  <form [formGroup]="atendenteForm" (ngSubmit)="save()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="nome">Nome:</label>
+        <input matInput id="nome" formControlName="nomeCompleto" type="text" />
+      </div>
+      <div class="campo">
+        <label for="cpf">CPF:</label>
+        <input matInput id="cpf" formControlName="cpf" type="text" />
+      </div>
+      <div class="campo">
+        <label for="especialidade">Especialidade:</label>
+        <select id="especialidade" formControlName="especialidadeAtendente">
+          <option value="RECEPCIONISTA">Recepcionista</option>
+          <option value="SECRETARIO">Secretário(a)</option>
+          <option value="ASSISTENTE_ADMINISTRATIVO">Assistente Administrativo</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="contato">Contato:</label>
+        <input matInput id="telefone" formControlName="telefone" type="text" />
+      </div>
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input matInput id="email" formControlName="email" type="email" />
+      </div>
+      <div class="campo">
+        <label for="cep">CEP:</label>
+        <input matInput id="cep" formControlName="cep" type="text" />
+      </div>
+      <div class="campo">
+        <label for="bairro">Bairro:</label>
+        <input matInput id="bairro" formControlName="bairro" type="text" />
+      </div>
+      <div class="campo">
+        <label for="uf">UF:</label>
+        <select id="estado" formControlName="estado">
+          <option *ngFor="let estado of ufs" [value]="estado.sigla">{{ estado.nome }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="endereco">Endereço:</label>
+        <input matInput id="endereco" formControlName="endereco" type="text" />
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

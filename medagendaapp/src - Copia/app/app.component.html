@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <button class="hamburger hamburger--squeeze" [class.is-active]="menuOpen" (click)="toggleMenu()">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+  <span class="app-title">
+    <img src="../assets/imagens/logo1.png" alt="Logo" class="logo" />
+    MedAgenda
+  </span>
+
+  <div class="user-info" *ngIf="nomeUsuario && papelUsuario">
+    <span>{{ nomeUsuario }}</span>
+    <span class="user-role">({{ papelUsuario }})</span>
+    <a href="javascript:void(0)"
+         (click)="logout()"
+         class="btn btn-success">Logout</a>
+  </div>
+</mat-toolbar>
+
+<div class="side-menu" [class.open]="menuOpen">
+  <dropdown-menu>
+    Configurações
+    <button mat-button class="menu-item" [routerLink]="'/especialidade'">
+      <img src="assets/imagens/star.svg" alt="Especialidades" class="menu-icon" />
+      Especialidades
+    </button>
+    <button mat-button class="menu-item" [routerLink]="'/atendente-usuario'">
+      <img src="assets/imagens/person.svg" alt="Usuário" class="menu-icon" />
+      Atendentes
+    </button>
+  </dropdown-menu>
+  <button mat-button class="menu-item" [routerLink]="'/atendimento'">
+    <img src="assets/imagens/assignment.svg" alt="Atendimento" class="menu-icon" />
+    Atendimento
+  </button>
+  <button mat-button class="menu-item" [routerLink]="'/paciente'">
+    <img src="assets/imagens/list_alt.svg" alt="Pacientes" class="menu-icon" />
+    Pacientes
+  </button>
+  <button mat-button class="menu-item" [routerLink]="'/profissionais'">
+    <img src="assets/imagens/medical_services.svg" alt="Profissionais" class="menu-icon" />
+    Profissionais
+  </button>
+</div>
+
+<div class="app-content">
+  <router-outlet></router-outlet>
+</div>

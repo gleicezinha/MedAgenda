@@ -1,0 +1,57 @@
+<div class="profissional-form-container">
+  <h1 class="titulo">Formulário de Profissional</h1>
+  <form [formGroup]="profissionalForm" (ngSubmit)="save()">
+    <div class="form-grid">
+      <div class="campo">
+        <label for="nomeCompleto">Nome:</label>
+        <input id="nomeCompleto" formControlName="nomeCompleto" type="text" />
+      </div>
+      <div class="campo">
+        <label for="cpf">CPF:</label>
+        <input id="cpf" formControlName="cpf" type="text" />
+      </div>
+      <div class="campo">
+        <label for="especialidade">Especialidade:</label>
+        <select id="especialidade" formControlName="especialidade">
+          <option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
+            {{ especialidade.nome }}
+          </option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="telefone">Contato:</label>
+        <input id="telefone" formControlName="telefone" type="text" />
+      </div>
+      <div class="campo">
+        <label for="registroConselho">Registro do Conselho:</label>
+        <input id="registroConselho" formControlName="registroConselho" type="text" />
+      </div>
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input id="email" formControlName="email" type="email" />
+      </div>
+      <div class="campo">
+        <label for="cep">CEP:</label>
+        <input id="cep" formControlName="cep" type="text" />
+      </div>
+      <div class="campo">
+        <label for="bairro">Bairro:</label>
+        <input id="bairro" formControlName="bairro" type="text" />
+      </div>
+      <div class="campo">
+        <label for="uf">UF:</label>
+        <select id="uf" formControlName="uf">
+          <option *ngFor="let uf of ufs" [value]="uf.sigla">{{ uf.nome }}</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="endereco">Endereço:</label>
+        <input id="endereco" formControlName="endereco" type="text" />
+      </div>
+    </div>
+    <div class="botoes">
+      <button type="submit" class="btn-salvar">Salvar</button>
+      <button type="button" class="btn-cancelar" (click)="cancel()">Cancelar</button>
+    </div>    
+  </form>
+</div>

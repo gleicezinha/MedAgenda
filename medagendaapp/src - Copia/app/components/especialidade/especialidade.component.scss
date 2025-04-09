@@ -1,0 +1,78 @@
+.pacientes-container {
+    padding: 20px;
+  
+    .title {
+      text-align: left;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  
+    .content {
+      display: flex; 
+      gap: 20px; 
+    }
+  
+    .left-panel {
+      flex: 1; 
+      max-width: 300px; 
+      display: flex;
+      flex-direction: column;
+      gap: 20px; 
+    }
+        .search-container {
+        margin-bottom: 20px; 
+    }
+    
+    .add-button-container {
+        margin-top: 10px; 
+        text-align: left;
+    }
+  
+    .search-field {
+      width: 100%;
+  
+      mat-form-field {
+        width: 100%;
+      }
+  
+      .search-button {
+        color: #b0b0b0;
+      }
+    }
+    
+    button mat-icon {
+      color: #000000 !important;
+    }
+    .add-button-container {
+      text-align: left;
+    }
+  
+    .add-button {
+      background-color: #4caf50 !important;
+      color: #ffffff !important;
+    }
+  
+    .right-panel {
+      flex: 2; 
+      display: flex;
+      flex-direction: column;
+      gap: 10px; 
+    }
+  
+    .pacientes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+      .paciente-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #333333;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+  }

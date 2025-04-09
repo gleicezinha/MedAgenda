@@ -1,0 +1,60 @@
+
+<div class="profissionais-container">
+  <div class="header">
+    <mat-form-field appearance="outline" class="search-field">
+      <button mat-icon-button matPrefix class="search-button">
+        <img src="assets/imagens/search.svg" alt="Buscar" class="menu-icon" />
+      </button>
+      <input
+        matInput
+        placeholder="Buscar Profissional"
+        [(ngModel)]="termoBusca"
+        (input)="buscarProfissionais()"
+      />
+    </mat-form-field>
+  </div>
+  <div class="add-button-container">
+    <button mat-raised-button color="primary" class="add-button" (click)="adicionar()">
+      Adicionar Profissional
+    </button>
+  </div>
+
+  <h2 class="title">Profissionais</h2>
+
+  <table mat-table [dataSource]="profissionaisFiltrados" class="mat-elevation-z8">
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let profissional"> {{ profissional.nomeCompleto }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="especialidade">
+      <th mat-header-cell *matHeaderCellDef> Especialidade </th>
+      <td mat-cell *matCellDef="let profissional"> {{ profissional.especialidade.nome }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contato">
+      <th mat-header-cell *matHeaderCellDef> Contato </th>
+      <td mat-cell *matCellDef="let profissional"> {{ profissional.telefone }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let profissional"> {{ profissional.email }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let profissional">
+        <button mat-icon-button color="primary" (click)="editar(profissional)">
+          <img src="assets/imagens/edit.svg" alt="Editar" class="menu-icon" />
+        </button>
+        <button mat-icon-button color="warn" (click)="deletar(profissional)">
+          <img src="assets/imagens/delete.svg" alt="Excluir" class="menu-icon" />
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

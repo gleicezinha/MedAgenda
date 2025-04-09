@@ -1,0 +1,82 @@
+<div class="paciente-detalhes-container">
+  <h1 class="titulo">Paciente: {{ paciente.nomeCompleto }}</h1>
+
+  <div class="conteudo">
+    <div class="esquerda">
+      <div class="detalhes-grid">
+        <div class="campo">
+          <label>Data de Nascimento:</label>
+          <span>{{ paciente.dataNascimento  | date: 'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="campo">
+          <label>CPF:</label>
+          <span>{{ paciente.cpf }}</span>
+        </div>
+        <div class="campo">
+          <label>Contato:</label>
+          <span>{{ paciente.telefone }}</span>
+        </div>
+        <div class="campo">
+          <label>Contato de Emergência:</label>
+          <span>{{paciente.telefoneEmergencial}}</span>
+        </div>
+        <div class="campo">
+          <label>E-mail:</label>
+          <span>{{ paciente.email }}</span>
+        </div>
+        <div class="campo">
+          <label>Sexo:</label>
+          <span *ngIf="paciente.sexo  == 'F'">Feminino</span>
+          <span *ngIf="paciente.sexo  == 'M'">Masculino</span>
+        </div>
+        <div class="campo">
+          <label>Tipo Sanguíneo:</label>
+          <span *ngIf="paciente.grupoSanguineo == 'B_NEGATIVO'">B-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'A_NEGATIVO'">A-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'AB_NEGATIVO'">AB-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'O_NEGATIVO'">0-</span>
+          <span *ngIf="paciente.grupoSanguineo == 'B_POSITIVO'">B+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'A_POSITIVO'">A+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'AB_POSITIVO'">AB+</span>
+          <span *ngIf="paciente.grupoSanguineo == 'O_POSITIVO'">O+</span>
+        </div>
+        <div class="campo">
+          <label>CEP:</label>
+          <span>{{ paciente.cep}}</span>
+        </div>
+        <div class="campo">
+          <label>Bairro:</label>
+          <span>{{paciente.bairro}}</span>
+        </div>
+        <div class="campo">
+          <label>Endereço:</label>
+          <span>{{ paciente.endereco }}</span>
+        </div>
+        <div class="campo">
+          <label>UF:</label>
+          <span>{{paciente.estado}}</span>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <!-- <button mat-raised-button class="btn-prontuario" [routerLink]="['/prontuario-form', paciente.id]">Prontuário</button> -->
+        <button mat-raised-button class="btn-atestado" (click)="baixarAtestado()">Atestado</button>
+        <button mat-raised-button class="btn-exame" (click)="baixarExame()">Pedir Exame</button>
+        <button mat-raised-button class="btn-pericia" (click)="baixarPericia()">Perícia</button>
+      </div>
+    </div>
+
+    <div class="direita">
+      <div class="consultas">
+        <h3>Consultas</h3>
+        <ul>
+          <li *ngFor="let prontuario of prontuarios">
+            <a [routerLink]="['/prontuario-form']" [queryParams]="{ id: prontuario.id }">
+              <span>{{prontuario.atendimento.dataDeAtendimento }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
