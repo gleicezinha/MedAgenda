@@ -1,49 +1,47 @@
 <div class="prontuario-form-container">
   <h1 class="titulo">Formulário de Prontuário</h1>
 
-  <form [formGroup]="prontuarioForm" (ngSubmit)="onSubmit()">
+  <form (submit)="save()" #form="ngForm">
     <div class="form-grid">
       <div class="campo">
-        <label for="dataAtendimento">Dia do Atendimento:</label>
-        <input matInput id="dataAtendimento" formControlName="dataAtendimento" type="date" />
+        <label for="dataAtendimento">Dia do Atendimento: {{registro.atendimento.dataDeAtendimento}}</label>
       </div>
-      <div class="campo">
-        <label for="tipoAtendimento">Tipo de Atendimento:</label>
-        <select id="tipoAtendimento" formControlName="tipoAtendimento">
-          <option value="CONSULTA">Consulta</option>
-          <option value="EXAME">Exame</option>
-          <option value="RETORNO">Retorno</option>
-        </select>
-      </div>
+      
       <div class="campo">
         <label for="doencasCognitivas">Doenças Cognitivas?</label>
-        <input matInput id="doencasCognitivas" formControlName="doencasCognitivas" type="text" />
+        <input matInput id="doencasCognitivas" name="doencasCognitivas" [(ngModel)]="registro.qualDoencaCognitiva" type="text" />
       </div>
+  
       <div class="campo">
         <label for="alergias">Tem alguma alergia?</label>
-        <input matInput id="alergias" formControlName="alergias" type="text" />
+        <input matInput id="alergias" name="alergias" [(ngModel)]="registro.qualAlergia" type="text" />
       </div>
+  
       <div class="campo">
         <label for="usaRemedios">Usa algum remédio?</label>
-        <input matInput id="usaRemedios" formControlName="usaRemedios" type="text" />
+        <input matInput id="usaRemedios" name="usaRemedios" [(ngModel)]="registro.qualRemedio" type="text" />
       </div>
+  
       <div class="campo">
         <label for="problemaRelatado">Problema relatado:</label>
-        <input matInput id="problemaRelatado" formControlName="problemaRelatado" type="text" />
+        <input matInput id="problemaRelatado" name="problemaRelatado" [(ngModel)]="registro.problemaRelatado" type="text" />
       </div>
+  
       <div class="campo">
         <label for="descricao">Descrição:</label>
-        <textarea matInput id="descricao" formControlName="descricao"></textarea>
+        <textarea matInput id="descricao" name="descricao" [(ngModel)]="registro.descricao"></textarea>
       </div>
+  
       <div class="campo">
         <label for="prescricao">Prescrição:</label>
-        <textarea matInput id="prescricao" formControlName="prescricao"></textarea>
+        <textarea matInput id="prescricao" name="prescricao" [(ngModel)]="registro.prescricao"></textarea>
       </div>
     </div>
-
+  
     <div class="botoes">
       <button type="submit" class="btn-salvar">Salvar</button>
-      <button type="button" class="btn-cancelar" (click)="onCancel()">Cancelar</button>
+      <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
     </div>
   </form>
+  
 </div>

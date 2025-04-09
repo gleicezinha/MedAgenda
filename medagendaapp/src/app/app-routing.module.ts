@@ -37,7 +37,6 @@ const routes: Routes = [
   { path: 'atendente-form', component: AtendenteFormComponent},
   { path: 'especialidade', component: EspecialidadeComponent},
   { path: 'prontuario-form', component: ProntuarioFormComponent},
-  { path: 'prontuario-form/:id', component: ProntuarioFormComponent },
   { path: 'especialidade-form', component: EspecialidadeFormComponent},
   { path: 'calendario', component: CalendarioComponent},
   { path: '**', redirectTo: 'login' },

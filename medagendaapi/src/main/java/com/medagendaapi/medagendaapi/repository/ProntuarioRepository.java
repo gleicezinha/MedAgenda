@@ -23,5 +23,13 @@ public interface ProntuarioRepository extends JpaRepository<Prontuario, Long> {
     )
     List<Prontuario> buscaPorPaciente(Long pacienteId);
 
+    @Query(
+        """
+        SELECT p FROM Prontuario p
+        WHERE p.atendimento.id = :idAtendimento
+        """
+    )
+    Prontuario buscaPorAtendimento(Long idAtendimento);
+
     
 }

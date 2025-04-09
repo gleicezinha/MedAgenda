@@ -41,5 +41,10 @@ public class ProntuarioService implements ICrudService<Prontuario> {
         List<Prontuario> registros = repo.buscaPorPaciente(pacienteId);
         return registros;
     }
+
+    public Prontuario getByAtendimento(Long idAtendimento){
+        Prontuario registro = repo.buscaPorAtendimento(idAtendimento);
+        return registro;
+    }
     
 }

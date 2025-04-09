@@ -30,6 +30,11 @@ export class ProntuarioService implements ICrudService<Prontuario> {
     return this.http.get<Prontuario[]>(`${this.apiUrl}/consultar-paciente/${id}`);
   }
 
+  getByAtendimento(id: number): Observable<Prontuario> {
+    let url = this.apiUrl + '/consultar-por-atendimento/' + id;
+    return this.http.get<Prontuario>(url);
+  }
+
   save(objeto: Prontuario): Observable<Prontuario> {
     let url = this.apiUrl;
     if (objeto.id) {
