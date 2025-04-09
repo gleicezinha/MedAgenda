@@ -30,6 +30,7 @@ export class ProntuarioFormComponent {
       this.servico.getById(+id).subscribe({
         next: (resposta: Prontuario) => {
           this.registro = resposta;
+          this.atendimento = resposta.atendimento;
         }
       })
     }
@@ -39,6 +40,7 @@ export class ProntuarioFormComponent {
       this.servico.getByAtendimento(+idAtendimento).subscribe({
         next: (resposta: Prontuario) => {
           this.registro = resposta;
+          this.atendimento = resposta.atendimento;
         }
       })
       if (this.registro == null){
@@ -63,7 +65,9 @@ export class ProntuarioFormComponent {
     this.servico.save(this.registro).subscribe({
       complete: () => {
         alert('Prontuário salvo com sucesso!');
-        this.router.navigate(['/paciente-detalhes'], {queryParams: {id: this.registro.atendimento?.paciente?.id}})
+        //console.log(this.atendimento.paciente.id)
+        //const idPaciente = this.atendimento.paciente.id
+        this.router.navigate(['/atendimento'])
       },
       error(err) {
         alert('Erro ao salvar prontuário');
