@@ -41,7 +41,7 @@ public class AtendenteService implements ICrudService<Atendente> {
             usuario.setEmail(objeto.getEmail());
             usuario.setTelefone(objeto.getTelefone());
             usuario.setNomeUsuario(objeto.getNomeCompleto().split(" ")[0]);
-            usuario.setPapel(EPapel.ATENDENTE);
+            usuario.setPapel(EPapel.ROLE_ATENDENTE);
             usuario.setSenha("senha123");
             repoUsuario.save(usuario);
         }

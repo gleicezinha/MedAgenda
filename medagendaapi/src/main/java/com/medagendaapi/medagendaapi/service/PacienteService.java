@@ -51,7 +51,7 @@ public class PacienteService implements ICrudService<Paciente>{
             usuario.setCpf(objeto.getCpf());
             usuario.setEmail(objeto.getEmail());
             usuario.setTelefone(objeto.getTelefone());
-            usuario.setPapel(EPapel.PACIENTE);
+            usuario.setPapel(EPapel.ROLE_PACIENTE);
             usuario.setSenha("senha123");
             servicoUsuario.save(usuario);
         }
