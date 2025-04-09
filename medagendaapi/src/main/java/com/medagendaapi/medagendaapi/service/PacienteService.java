@@ -44,8 +44,9 @@ public class PacienteService implements ICrudService<Paciente>{
 
     @Override
     public Paciente save(Paciente objeto) {
-        Paciente registro = repo.save(objeto);
-        if(objeto.getId() == null){ //Criando um usuário para o 
+        
+        if(objeto.getId() == null){ //Criando um usuário para o paciente
+            System.out.println("Aqui");
             Usuario usuario = new Usuario();
             usuario.setNomeUsuario(objeto.getNomeCompleto().split(" ")[0]);
             usuario.setCpf(objeto.getCpf());
@@ -54,7 +55,10 @@ public class PacienteService implements ICrudService<Paciente>{
             usuario.setPapel(EPapel.ROLE_PACIENTE);
             usuario.setSenha("senha123");
             servicoUsuario.save(usuario);
+        } else {
+            System.out.println("Aqui2");
         }
+        Paciente registro = repo.save(objeto);
         return registro;
     }
     
