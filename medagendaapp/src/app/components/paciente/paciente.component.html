@@ -25,7 +25,7 @@
       <div class="pacientes-list">
         <div class="paciente-item" *ngFor="let paciente of registrosFiltrados; let i = index">
           <span>{{ paciente.nomeCompleto }}</span>
-          <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">ver prontuário</a>
+          <a class="ver-prontuario" [routerLink]="['/paciente-detalhes', paciente.id]">Detalhes Paciente</a>
           <span>
             <button mat-icon-button color="primary" (click)="editar(paciente)">
               <img src="assets/imagens/edit.svg" alt="Editar" class="menu-icon" />
