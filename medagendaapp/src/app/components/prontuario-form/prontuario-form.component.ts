@@ -12,7 +12,8 @@ import { Atendimento } from "../../models/atendimento.model";
   selector: 'app-prontuario-form',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './prontuario-form.component.html'
+  templateUrl: './prontuario-form.component.html',
+  styleUrls: ['./prontuario-form.component.scss'],
 })
 export class ProntuarioFormComponent {
 
