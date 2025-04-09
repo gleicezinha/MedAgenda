@@ -12,8 +12,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames =  { "data_de_atendimento", "horario_de_atendimento", "medico_id"}),
+    @UniqueConstraint(columnNames =  { "data_de_atendimento", "horario_de_atendimento", "paciente_id"})
+})
 public class Atendimento implements Serializable {
     
     @Id
