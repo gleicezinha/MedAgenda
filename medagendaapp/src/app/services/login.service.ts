@@ -20,7 +20,7 @@ export class LoginService {
       this.agendarRenovacaoToken();
     }
   }
-
+  usuario$ = new BehaviorSubject<Usuario | null>(null);
   usuarioAutenticado: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(<Usuario>{});
   private temRequisicaoRecente: boolean = false;
   private intervaloRenovacaoToken: any;
@@ -67,6 +67,22 @@ export class LoginService {
     this.http.post(url, usuario, {responseType: 'text'}).subscribe({
       next: (token: string) => {
         this.iniciarSessaoUsuario(token);
+        const dados = token.split('.')[1];
+        const dadosDecodificados = atob(dados);
+        const conteudoToken = JSON.parse(dadosDecodificados);
+        sessionStorage.setItem('nomeUsuario', conteudoToken.nomeCompleto);
+        sessionStorage.setItem('papelUsuario', conteudoToken.papel);
+        const usuarioLogado: Usuario = {
+          id: 0, 
+          nomeUsuario: conteudoToken.nomeCompleto,
+          cpf: '',
+          email: '',
+          telefone: '',
+          senha: '',
+          papel: conteudoToken.papel,
+          ativo: true
+        };
+        this.usuario$.next(usuarioLogado); 
       },
       complete: () => {
         this.router.navigate(['atendimento'])
