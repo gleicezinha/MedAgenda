@@ -36,12 +36,19 @@ export class ProntuarioFormComponent {
 
     const idAtendimento = this.rota.snapshot.queryParamMap.get('idAtendimento');
     if (idAtendimento && id == null){
-      this.atendimentoService.getById(+idAtendimento).subscribe({
-        next: (resposta: Atendimento) => {
-          this.atendimento = resposta;
-          this.registro.atendimento = resposta;
+      this.servico.getByAtendimento(+idAtendimento).subscribe({
+        next: (resposta: Prontuario) => {
+          this.registro = resposta;
         }
       })
+      if (this.registro == null){
+        this.atendimentoService.getById(+idAtendimento).subscribe({
+          next: (resposta: Atendimento) => {
+            this.atendimento = resposta;
+            this.registro.atendimento = resposta;
+          }
+        })
+      }
     }
   }
 
@@ -56,7 +63,7 @@ export class ProntuarioFormComponent {
     this.servico.save(this.registro).subscribe({
       complete: () => {
         alert('Prontuário salvo com sucesso!');
-        this.router.navigate(['/paciente-detalhes'], {queryParams: {id: this.atendimento.paciente.id}})
+        this.router.navigate(['/paciente-detalhes'], {queryParams: {id: this.registro.atendimento?.paciente?.id}})
       },
       error(err) {
         alert('Erro ao salvar prontuário');

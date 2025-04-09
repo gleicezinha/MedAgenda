@@ -3,7 +3,7 @@
 
   <form (submit)="save()" #form="ngForm">
     <div class="form-grid">
-      <div class="campo">
+      <div class="campo" *ngIf="(registro?.atendimento?.dataDeAtendimento ?? '') !== ''">
         <label for="dataAtendimento">Dia do Atendimento: {{registro.atendimento.dataDeAtendimento}}</label>
       </div>
       

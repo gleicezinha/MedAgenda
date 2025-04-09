@@ -71,7 +71,7 @@
         <h3>Consultas</h3>
         <ul>
           <li *ngFor="let prontuario of prontuarios">
-            <a routerLink="prontuario-form" [queryParams]="{ id: prontuario.id }">
+            <a [routerLink]="['/prontuario-form']" [queryParams]="{ id: prontuario.id }">
               <span>{{prontuario.atendimento.dataDeAtendimento }}</span>
             </a>
           </li>
