@@ -60,5 +60,11 @@ public class AtendimentoController implements ICrudController<Atendimento> {
         Atendimento registro = servico.save(objeto);
         return ResponseEntity.ok(registro);
     }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Atendimento> atualizarStatus(@PathVariable Long id) {
+        Atendimento registro = servico.updateStatus(id);
+        return ResponseEntity.ok(registro);
+    }
     
 }

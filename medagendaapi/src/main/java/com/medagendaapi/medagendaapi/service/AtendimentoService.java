@@ -41,5 +41,15 @@ public class AtendimentoService implements ICrudService<Atendimento> {
         Atendimento registro = repo.save(objeto);
         return registro;
     }
+
+    public Atendimento updateStatus(Long id) {
+        var registro = this.get(id);
+        if (registro != null) {
+            var novoStatus = registro.getStatus().proximo();
+            registro.setStatus(novoStatus);
+            this.save(registro);
+        }
+        return registro;
+    }
     
 }

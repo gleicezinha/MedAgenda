@@ -12,6 +12,9 @@
   <div class="user-info" *ngIf="nomeUsuario && papelUsuario">
     <span>{{ nomeUsuario }}</span>
     <span class="user-role">({{ papelUsuario }})</span>
+    <a href="javascript:void(0)"
+         (click)="logout()"
+         class="btn btn-success">Logout</a>
   </div>
 </mat-toolbar>
 

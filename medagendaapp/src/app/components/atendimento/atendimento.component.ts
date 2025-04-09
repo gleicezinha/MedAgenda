@@ -58,7 +58,7 @@ export class AtendimentoComponent implements OnInit {
   }
 
   excluir(id: number): void {
-    if(confirm("Deseja excluir esse atendimento?")) {
+    if(confirm("Deseja cancelar esse atendimento?")) {
       this.atendimentoService.delete(id).subscribe({
         next: () => {
           this.carregarAtendimentos();
@@ -67,6 +67,19 @@ export class AtendimentoComponent implements OnInit {
           console.error('Erro ao excluir atendimento:', err);
           alert('Erro ao excluir atendimento. Verifique se o atendimento não está vinculado a um paciente ou médico.');
         }    
+      });
+    }
+  }
+
+  atualizarStatus(id: number): void {
+    if(confirm('Deseja atualizar o status do atendimento?')){
+      this.atendimentoService.atualizarStatus(id).subscribe({
+        next: () => {
+            this.carregarAtendimentos();
+        },
+        error(err) {
+            alert("Erro ao atualizar status");
+        }
       });
     }
   }

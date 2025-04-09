@@ -59,7 +59,7 @@
         <button mat-icon-button color="warn" [routerLink]="['/prontuario-form']" [queryParams]="{idAtendimento: atendimento.id}">
           <img src="assets/imagens/plus.svg" alt="Prontuario" class="menu-icon" />
         </button>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="atualizarStatus(atendimento.id)">
           <img src="assets/imagens/up_arrow.svg" alt="Prontuario" class="menu-icon" />
         </button>
       </td>

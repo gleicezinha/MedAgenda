@@ -39,4 +39,9 @@ export class AppComponent implements OnInit {
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
+
+  logout(): void {
+    this.loginService.logout();
+    this.atualizarInformacoesUsuario()
+  }
 }

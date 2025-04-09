@@ -52,4 +52,9 @@ export class AtendimentoService implements ICrudService<Atendimento> {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/remover/${id}`);
   }
+
+  atualizarStatus(id: number): Observable<Atendimento> {
+    let url = this.apiUrl + '/status/' + id
+    return this.http.put<Atendimento>(url, null);
+  }
 }

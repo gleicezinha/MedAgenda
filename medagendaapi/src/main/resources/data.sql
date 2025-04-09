@@ -8,6 +8,10 @@ VALUES
 ('luiz', '$2a$12$QpqF1obzwO/PUSjQDKr9/OlYL2FpabbImda0eOF.hOl8iBNZE2cwq', 'luiz@saudevida.com', '(41) 94444-4444', '44455566677', true, 'ROLE_MEDICO'),
 ('john', '$2a$12$QpqF1obzwO/PUSjQDKr9/OlYL2FpabbImda0eOF.hOl8iBNZE2cwq', 'john@clinicageral.com', '(51) 95555-5555', '55566677788', true, 'ROLE_MEDICO');
 
+INSERT INTO usuario (nome_usuario, senha, email, telefone, cpf, ativo, papel)
+VALUES ('Ana Beatriz da Silva','$2a$12$lM3WC12pRb7KwGaK6D01UeOmp9PxOgP1WSd4nFILqe2T5IBQfxhbG', 'ana.silva@example.com','(11) 91234-5678','12345678900', true,'ROLE_ATENDENTE'
+);
+
 INSERT INTO especialidade (id, nome)
 VALUES (1, 'Cardiologia');
 
