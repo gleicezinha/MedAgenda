@@ -8,6 +8,11 @@
     <img src="../assets/imagens/logo1.png" alt="Logo" class="logo" />
     MedAgenda
   </span>
+
+  <div class="user-info" *ngIf="nomeUsuario && papelUsuario">
+    <span>{{ nomeUsuario }}</span>
+    <span class="user-role">({{ papelUsuario }})</span>
+  </div>
 </mat-toolbar>
 
 <div class="side-menu" [class.open]="menuOpen">
