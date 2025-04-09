@@ -93,7 +93,7 @@ public class Seguranca {
             authorize -> authorize
                 .requestMatchers("/autenticacao").permitAll()
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
-                .requestMatchers("/prontuario/**").hasAnyRole("MEDICO, ADMIN")
+            .requestMatchers("/prontuario/**").hasAnyRole("MEDICO", "ADMIN")
                 //.requestMatchers(HttpMethod.POST, "/paciente/inserir").hasAnyRole("MEDICO", "ADMIN", "ATENDENTE")
                 .anyRequest().authenticated()
         );

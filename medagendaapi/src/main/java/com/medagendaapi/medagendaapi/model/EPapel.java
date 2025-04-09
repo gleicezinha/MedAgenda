@@ -1,8 +1,8 @@
 package com.medagendaapi.medagendaapi.model;
 
 public enum EPapel {
-    PACIENTE,
-    MEDICO,
-    ATENDENTE,
-    ADMIN
+    ROLE_PACIENTE,
+    ROLE_MEDICO,
+    ROLE_ATENDENTE,
+    ROLE_ADMIN
 }

@@ -45,7 +45,7 @@ public class MedicoService implements ICrudService<Medico> {
             usuario.setEmail(objeto.getEmail());
             usuario.setTelefone(objeto.getTelefone());
             usuario.setNomeUsuario(objeto.getNomeCompleto().split(" ")[0]);
-            usuario.setPapel(EPapel.MEDICO);
+            usuario.setPapel(EPapel.ROLE_MEDICO);
             usuario.setSenha("senha123");
             repoUsuario.save(usuario);
         }
