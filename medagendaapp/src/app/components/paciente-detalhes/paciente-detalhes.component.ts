@@ -6,6 +6,7 @@ import { Atendimento } from '../../models/atendimento.model';
 import { AtendimentoService } from '../../services/atendimento.service';
 import { ProntuarioService } from '../../services/prontuario.service';
 import { Prontuario } from '../../models/prontuario.model';
+import { PdfServiceService } from '../../services/pdf-service.service';
 
 @Component({
   selector: 'app-paciente-detalhes',
@@ -24,6 +25,7 @@ export class PacienteDetalhesComponent implements OnInit {
     private route: ActivatedRoute,
     private pacienteService: PacienteService,
     private prontuarioService: ProntuarioService,
+    private pdfService: PdfServiceService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +65,39 @@ export class PacienteDetalhesComponent implements OnInit {
           console.log(this.prontuarios);
         }
     })
+  }
+
+  baixarAtestado(){
+    this.pdfService.atestado().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'atestado.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+  baixarPericia(){
+    this.pdfService.pericia().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'pericia.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+  baixarExame(){
+    this.pdfService.exame().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'exame.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 
 }
