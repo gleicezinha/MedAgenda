@@ -60,9 +60,9 @@
 
       <div class="acoes">
         <button mat-raised-button class="btn-prontuario" [routerLink]="['/prontuario-form', paciente.id]">Prontuário</button>
-        <button mat-raised-button class="btn-atestado">Atestado</button>
-        <button mat-raised-button class="btn-exame">Pedir Exame</button>
-        <button mat-raised-button class="btn-pericia">Perícia</button>
+        <button mat-raised-button class="btn-atestado" (click)="baixarAtestado()">Atestado</button>
+        <button mat-raised-button class="btn-exame" (click)="baixarExame()">Pedir Exame</button>
+        <button mat-raised-button class="btn-pericia" (click)="baixarPericia()">Perícia</button>
       </div>
     </div>
 
