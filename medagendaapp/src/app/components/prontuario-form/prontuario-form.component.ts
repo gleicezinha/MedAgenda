@@ -39,18 +39,21 @@ export class ProntuarioFormComponent {
     if (idAtendimento && id == null){
       this.servico.getByAtendimento(+idAtendimento).subscribe({
         next: (resposta: Prontuario) => {
-          this.registro = resposta;
-          this.atendimento = resposta.atendimento;
+          if (resposta != null){
+            this.registro = resposta;
+            console.log(resposta.atendimento)
+            this.atendimento = resposta.atendimento;
+          } else {
+              this.atendimentoService.getById(+idAtendimento).subscribe({
+                next: (resposta: Atendimento) => {
+                  this.atendimento = resposta;
+                  this.registro.atendimento = resposta;
+                }
+              })
+          }
         }
       })
-      if (this.registro == null){
-        this.atendimentoService.getById(+idAtendimento).subscribe({
-          next: (resposta: Atendimento) => {
-            this.atendimento = resposta;
-            this.registro.atendimento = resposta;
-          }
-        })
-      }
+      
     }
   }
 
