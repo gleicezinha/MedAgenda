@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AtendimentoComponent implements OnInit {
   displayedColumns: string[] = ['dataDeAtendimento', 'horarioDeAtendimento','status', 'medico', 'paciente', 'tipoDeAtendimento', 'acoes'];
   atendimentos: Atendimento[] = [];
+  atendimentosFiltrados: any[] = [];
   termoBusca: string = '';
 
   constructor(
@@ -25,17 +26,6 @@ export class AtendimentoComponent implements OnInit {
     this.carregarAtendimentos();
   }
 
-  carregarAtendimentos(): void {
-    this.atendimentoService.get().subscribe({
-      next: (dados: Atendimento[]) => {
-        this.atendimentos = dados;
-      },
-      error: (erro: HttpErrorResponse) => {
-        console.error('Erro ao buscar atendimentos:', erro);
-      }
-    });
-  }
-
   cadastrar(): void {
     this.router.navigate(['/atendimento-form']);
   }
@@ -45,12 +35,26 @@ export class AtendimentoComponent implements OnInit {
   }
 
   buscarComTermo(termoBusca: string): void {
-    termoBusca = termoBusca.trim().toLowerCase();
-    this.atendimentoService.get(termoBusca).subscribe({
-      next: (resposta: Atendimento[]) => {
-        this.atendimentos = resposta;
+    termoBusca = termoBusca.trim().toLowerCase(); 
+    this.atendimentosFiltrados = this.atendimentos.filter(
+      (atendimento) =>
+        atendimento.medico.nomeCompleto.toLowerCase().startsWith(termoBusca) ||
+        atendimento.paciente.nomeCompleto.toLowerCase().startsWith(termoBusca) ||
+        atendimento.tipoDeAtendimento.toLowerCase().startsWith(termoBusca)
+    );
+    console.log('Atendimentos filtrados:', this.atendimentosFiltrados); 
+  }
+
+  carregarAtendimentos(): void {
+    this.atendimentoService.get().subscribe({
+      next: (dados: Atendimento[]) => {
+        this.atendimentos = dados;
+        this.atendimentosFiltrados = dados; 
+      },
+      error: (erro: HttpErrorResponse) => {
+        console.error('Erro ao buscar atendimentos:', erro);
       }
-    })
+    });
   }
 
   excluir(id: number): void {
