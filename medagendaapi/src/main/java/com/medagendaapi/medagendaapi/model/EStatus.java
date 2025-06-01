@@ -2,6 +2,7 @@ package com.medagendaapi.medagendaapi.model;
 
 public enum EStatus {
     CANCELADO,
+    SOLICITADO,
     AGENDADO,
     CONFIRMADO,
     CHEGADA,

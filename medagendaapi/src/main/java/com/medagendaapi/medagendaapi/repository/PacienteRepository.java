@@ -13,4 +13,10 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
         "WHERE (:termoBusca IS NULL OR p.nomeCompleto LIKE %:termoBusca%)"
     )
     List<Paciente> busca(String termoBusca);
+
+    @Query(
+        "SELECT p from Paciente p " + 
+        "WHERE p.cpf = :cpf "
+    )
+    Paciente buscaPorCpf(String cpf);
 }

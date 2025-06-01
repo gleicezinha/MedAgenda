@@ -93,6 +93,8 @@ public class Seguranca {
             authorize -> authorize
                 .requestMatchers("/autenticacao").permitAll()
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/atendimento/atualizar").hasAnyRole("ADMIN", "ATENDENTE")
+                .requestMatchers(HttpMethod.PUT, "/atendimento/status/{id}").hasAnyRole("ADMIN", "ATENDENTE")
                 .requestMatchers(HttpMethod.GET, "/atestado/pdf").permitAll()
                 .requestMatchers(HttpMethod.GET, "/pericia/pdf").permitAll()
                 .requestMatchers(HttpMethod.GET, "/exame/pdf").permitAll()

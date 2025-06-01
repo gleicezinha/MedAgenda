@@ -14,7 +14,9 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.medagendaapi.medagendaapi.model.Paciente;
 import com.medagendaapi.medagendaapi.model.Usuario;
+import com.medagendaapi.medagendaapi.service.PacienteService;
 import com.medagendaapi.medagendaapi.service.UsuarioService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,10 +29,12 @@ public class TokenService {
 
     private final HttpServletRequest request;
     private final UsuarioService usuarioService;
+    private final PacienteService pacienteService;
 
-    public TokenService(HttpServletRequest request, UsuarioService usuarioService){
+    public TokenService(HttpServletRequest request, UsuarioService usuarioService, PacienteService pacienteService){
         this.request = request;
         this.usuarioService = usuarioService;
+        this.pacienteService = pacienteService;
     }
 
     private Instant gerarDataExpiracao(){
@@ -99,7 +103,7 @@ public class TokenService {
 
         try {
             var tokenDecodificado = JWT.require(secret_crypt)
-                                .withIssuer("ALVO")
+                                .withIssuer("MEDAGENDA")
                                 .build()
                                 .verify(auth);
         
@@ -128,11 +132,38 @@ public class TokenService {
 
         try {
             var tokenDecodificado = JWT.require(secret_crypt)
-                                .withIssuer("ALVO")
+                                .withIssuer("MEDAGENDA")
                                 .build()
                                 .verify(auth);
             Usuario user = usuarioService.buscaPorCpf(tokenDecodificado.getSubject());
             return user;
+        } catch (TokenExpiredException e) {
+            return null;
+        }
+    }
+
+    public Paciente getPaciente() {
+        var auth = this.request.getHeader("Authorization");
+        if (auth == null || !auth.startsWith("Bearer ")){
+            return null;
+        }
+        auth = auth.replace("Bearer ", "");
+        try {
+            JWT.decode(auth);
+        }
+        catch (JWTDecodeException e){
+            return null;
+        }
+
+        var secret_crypt = Algorithm.HMAC256(secret);
+
+        try {
+            var tokenDecodificado = JWT.require(secret_crypt)
+                                .withIssuer("MEDAGENDA")
+                                .build()
+                                .verify(auth);
+            Paciente paciente = pacienteService.getByCpf(tokenDecodificado.getSubject());
+            return paciente;
         } catch (TokenExpiredException e) {
             return null;
         }

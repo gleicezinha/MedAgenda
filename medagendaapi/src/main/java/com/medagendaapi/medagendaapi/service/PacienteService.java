@@ -42,6 +42,11 @@ public class PacienteService implements ICrudService<Paciente>{
         return registro;
     }
 
+    public Paciente getByCpf(String cpf){
+        Paciente registro = repo.buscaPorCpf(cpf);
+        return registro;
+    }
+
     @Override
     public Paciente save(Paciente objeto) {
         

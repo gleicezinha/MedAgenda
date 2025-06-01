@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.medagendaapi.medagendaapi.config.TokenService;
 import com.medagendaapi.medagendaapi.model.Atendimento;
+import com.medagendaapi.medagendaapi.model.EPapel;
+import com.medagendaapi.medagendaapi.model.EStatus;
 import com.medagendaapi.medagendaapi.service.AtendimentoService;
 
 @RestController
@@ -21,9 +24,11 @@ import com.medagendaapi.medagendaapi.service.AtendimentoService;
 public class AtendimentoController implements ICrudController<Atendimento> {
 
     private final AtendimentoService servico;
+    private final TokenService tokenService;
 
-    public AtendimentoController(AtendimentoService servico){
+    public AtendimentoController(AtendimentoService servico, TokenService tokenService){
         this.servico = servico;
+        this.tokenService = tokenService;
     }
 
     @Override
@@ -50,9 +55,25 @@ public class AtendimentoController implements ICrudController<Atendimento> {
     @Override
     @PostMapping("/inserir")
     public ResponseEntity<Atendimento> insert(@RequestBody Atendimento objeto) {
-        Atendimento registro = servico.save(objeto);
+        Atendimento registro = null;
+        String papel = tokenService.PapelDoUsuarioAutenticado();
+        if (papel == EPapel.ROLE_PACIENTE.toString()){
+            objeto.setStatus(EStatus.SOLICITADO);
+        }
+        registro = servico.save(objeto);
+        
         return ResponseEntity.ok(registro);
     }
+
+    // @PostMapping("/solicitar")
+    // public ResponseEntity<Atendimento> socilicitar(@RequestBody Atendimento objeto) {
+    //     Atendimento registro = null;
+    //     String papel = tokenService.PapelDoUsuarioAutenticado();
+    //     if (objeto.getStatus() == EStatus.SOLICITADO && papel == EPapel.ROLE_PACIENTE.toString()){
+    //         registro = servico.save(objeto);
+    //     }
+    //     return ResponseEntity.ok(registro);
+    // }
 
     @Override
     @PutMapping("/atualizar")

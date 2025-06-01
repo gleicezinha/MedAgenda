@@ -28,6 +28,10 @@ export class PacienteService implements ICrudService<Paciente> {
     return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
 
+  getByCpf(cpf: string): Observable<Paciente>{
+    return this.http.get<Paciente>(`${this.apiUrl}/cpf/${cpf}`)
+  }
+
   save(objeto: Paciente): Observable<Paciente> {
     let url = this.apiUrl;
     if (objeto.id) {

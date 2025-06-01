@@ -10,6 +10,9 @@ import { EStatus } from '../../models/estatus.model';
 import { PacienteService } from '../../services/paciente.service';
 import { MedicoService } from '../../services/medico.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
+import { Usuario } from '../../models/usuario.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-atendimento-form',
@@ -21,9 +24,12 @@ export class AtendimentoFormComponent implements OnInit {
   atendimentoForm!: FormGroup;
   tiposDeAtendimento = Object.values(EAtendimento);
   pacientes: Paciente[] = [];
+  usuario$: Observable<Usuario> = new Observable();
+  pacienteUsuario!: Paciente;
   profissionais: Medico[] = [];
   especialidades: string[] = [];
   idEditando: number | null = null;
+  usuarioEhPaciente: boolean = false;
 
   carregarEspecialidades(): void {
     this.especialidades = [
@@ -39,6 +45,7 @@ export class AtendimentoFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private loginService: LoginService,
     private atendimentoService: AtendimentoService,
     private pacienteService: PacienteService,
     private medicoService: MedicoService,
@@ -48,7 +55,7 @@ export class AtendimentoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarEspecialidades();
-  
+    this.usuario$ = this.loginService.usuarioAutenticado.asObservable();
     this.atendimentoForm = this.fb.group({
       dataDeAtendimento: ['', Validators.required],
       horarioDeAtendimento: ['', Validators.required],
@@ -56,7 +63,7 @@ export class AtendimentoFormComponent implements OnInit {
       atendente: [''],
       especialidade: [''],
       medico: ['', Validators.required],
-      paciente: ['', Validators.required]
+      paciente: [{ value: '', disabled: this.usuarioEhPaciente }, Validators.required]
     });
   
     const id = this.route.snapshot.queryParamMap.get('id');
@@ -66,7 +73,23 @@ export class AtendimentoFormComponent implements OnInit {
       this.carregarPacientesComPatch(+id); // 👈 usa método com patch
     } else {
       this.carregarMedicos();
-      this.carregarPacientes();
+      
+      //this.getCpfUsuarioAutenticado();
+      //this.carregarPacientCpf();
+      const papelUsuario = sessionStorage.getItem('papelUsuario');
+      console.log(papelUsuario)
+      if (papelUsuario === 'ROLE_PACIENTE') {
+        this.usuarioEhPaciente = true;
+        console.log(this.usuarioEhPaciente)
+        this.carregarPacienteCpf();
+        console.log(this.pacienteUsuario.nomeCompleto)
+        // this.atendimentoForm.get('paciente')?.setValue(this.pacienteUsuario);
+        // this.atendimentoForm.get('paciente')?.disable();
+      } 
+      else {
+        this.carregarPacientes();
+      }
+    
     }
   }
 
@@ -74,7 +97,7 @@ export class AtendimentoFormComponent implements OnInit {
     this.pacienteService.get().subscribe({
       next: (pacientes: Paciente[]) => {
         this.pacientes = pacientes;
-  
+        
         this.atendimentoService.getById(id).subscribe({
           next: (res) => {
             this.atendimentoForm.patchValue({
@@ -114,12 +137,34 @@ export class AtendimentoFormComponent implements OnInit {
     });
   }
 
+  carregarPacienteCpf(): void {
+    let cpf = this.getCpfUsuarioAutenticado();
+    if (cpf != ''){
+      this.pacienteService.getByCpf(cpf).subscribe({
+        next: (res: Paciente) => {
+          this.pacienteUsuario = res;
+          this.pacientes = [res]
+          console.log(this.pacienteUsuario.nomeCompleto)
+        }
+      })
+    }
+    else{
+      console.log("usuário não encontrado")
+    }
+  }
+
   carregarMedicos(): void {
     this.medicoService.get().subscribe({
       next: (res: Medico[]) => {
         this.profissionais = res;
       }
     });
+  }
+
+  private getCpfUsuarioAutenticado(): string {
+    const usuario = JSON.parse(sessionStorage.getItem('usuario') || '{}');
+    console.log(usuario.cpf)
+    return usuario.cpf || '';
   }
 
   onSubmit(): void {

@@ -38,6 +38,12 @@ public class PacienteController implements ICrudController<Paciente> {
         return ResponseEntity.ok(registros);
     }
 
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<Paciente> getByCpf(@PathVariable String cpf){
+        Paciente registro = servico.getByCpf(cpf);
+        return ResponseEntity.ok(registro);
+    }
+
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> get(@PathVariable Long id) {

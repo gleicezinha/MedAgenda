@@ -9,6 +9,12 @@ VALUES
 ('john', '$2a$12$QpqF1obzwO/PUSjQDKr9/OlYL2FpabbImda0eOF.hOl8iBNZE2cwq', 'john@clinicageral.com', '(51) 95555-5555', '55566677788', true, 'ROLE_MEDICO');
 
 INSERT INTO usuario (nome_usuario, senha, email, telefone, cpf, ativo, papel)
+VALUES 
+('paciente1', '$2a$12$VQW5m0QDuStYgTmcfG.AdO0iV4f4mwH0/fbqTISi2XDR8v58U5Gw6', 'paciente1@email.com', '(11) 98888-8888', '66677788899', true, 'ROLE_PACIENTE'),
+('paciente2', '$2a$12$siLnpiyGmuD/c31rbJqIM.Gs1XnSMTP67AbHy8TMpOrTHpM.f/SiS', 'paciente2@email.com', '(11) 98888-8888', '77788899900', true, 'ROLE_PACIENTE');
+
+
+INSERT INTO usuario (nome_usuario, senha, email, telefone, cpf, ativo, papel)
 VALUES ('Ana Beatriz da Silva','$2a$12$lM3WC12pRb7KwGaK6D01UeOmp9PxOgP1WSd4nFILqe2T5IBQfxhbG', 'ana.silva@example.com','(11) 91234-5678','12345678900', true,'ROLE_ATENDENTE'
 );
 
@@ -42,6 +48,11 @@ VALUES
 ('Gleice Beatriz', '30303030303', 'gleice@yahoo.com', 'MG', 'Rua Timbiras, 800', 'Barro Preto', '30140-061', '(31) 98888-5555', '(31) 97777-6666', '2000-02-28', 'B_NEGATIVO', 'F'),
 ('Rafael Alves', '40404040404', 'rafael@outlook.com', 'PR', 'Rua XV de Novembro, 300', 'Centro', '80020-310', '(41) 98888-7777', '(41) 97777-8888', '1987-09-18', 'AB_POSITIVO', 'M'),
 ('Mirele Almeida', '50505050505', 'mirele@gmail.com', 'RS', 'Av. Ipiranga, 4567', 'Partenon', '90610-000', '(51) 98888-9999', '(51) 97777-0000', '1999-04-05', 'O_POSITIVO', 'F');
+
+INSERT INTO paciente (nome_completo, cpf, email, estado, endereco, bairro, cep, telefone, telefone_emergencia, data_nascimento, grupo_sanguineo, sexo)
+VALUES 
+('Paciente Um', '66677788899', 'paciente1@email.com', 'SP', 'Rua Flores, 123', 'Centro', '01001-000', '(11) 98888-8888', '(11) 97777-0001', '1990-01-15', 'A_POSITIVO', 'F'),
+('Paciente Dois', '77788899900', 'paciente2@email.com', 'RJ', 'Av. Brasil, 456', 'Glória', '20021-340', '(21) 98888-8888', '(21) 97777-0002', '1985-06-20', 'O_NEGATIVO', 'M');
 
 INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento)
 VALUES
