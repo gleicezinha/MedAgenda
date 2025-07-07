@@ -98,7 +98,7 @@ public class Seguranca {
                 .requestMatchers(HttpMethod.GET, "/atestado/pdf").permitAll()
                 .requestMatchers(HttpMethod.GET, "/pericia/pdf").permitAll()
                 .requestMatchers(HttpMethod.GET, "/exame/pdf").permitAll()
-            .requestMatchers("/prontuario/**").hasAnyRole("MEDICO", "ADMIN")
+                .requestMatchers("/prontuario/**").hasAnyRole("MEDICO", "ADMIN")
                 //.requestMatchers(HttpMethod.POST, "/paciente/inserir").hasAnyRole("MEDICO", "ADMIN", "ATENDENTE")
                 .anyRequest().authenticated()
         );

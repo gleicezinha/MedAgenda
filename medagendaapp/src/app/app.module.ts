@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +30,7 @@ import { EspecialidadeFormComponent } from './components/especialidade-form/espe
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ErroInterceptor } from './interceptors/erro.interceptor';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    provideHttpClient(withInterceptors([ErroInterceptor]))
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

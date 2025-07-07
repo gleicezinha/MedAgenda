@@ -1,7 +1,11 @@
 package com.medagendaapi.medagendaapi.service;
 
 import java.util.List;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import com.medagendaapi.medagendaapi.controller.exception.AtendimentoDuplicado;
 import com.medagendaapi.medagendaapi.model.Atendimento;
 import com.medagendaapi.medagendaapi.model.EStatus;
 import com.medagendaapi.medagendaapi.repository.AtendimentoRepository;
@@ -38,8 +42,14 @@ public class AtendimentoService implements ICrudService<Atendimento> {
 
     @Override
     public Atendimento save(Atendimento objeto) {
-        Atendimento registro = repo.save(objeto);
-        return registro;
+        try{
+            Atendimento registro = repo.save(objeto);
+            return registro;
+        }
+        catch(DataIntegrityViolationException d){
+            throw new AtendimentoDuplicado("Médico ou paciente com atendimento já marcado!");
+        }
+        
     }
 
     public Atendimento updateStatus(Long id) {
