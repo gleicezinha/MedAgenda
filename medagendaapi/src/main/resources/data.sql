@@ -71,19 +71,18 @@ VALUES
 (6, TRUE, 'Diabetes Tipo 2', FALSE, NULL, TRUE, 'Metformina', FALSE, NULL, FALSE, NULL, 'Paciente em tratamento para diabetes.'),
 (7, FALSE, NULL, TRUE, 'Cirurgia de hérnia', FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Pós-cirurgia sem complicações.');
 
-INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento)
+INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento, problema_relatado)
 VALUES
-('2025-04-05', '09:00:00', 1, 1, 'CHEGADA', NULL, 'CONSULTA'),
-('2025-04-06', '10:30:00', 2, 2, 'AGENDADO', NULL, 'EXAME'),
-('2025-04-06', '13:00:00', 3, 3, 'ENCERRADO', NULL, 'RETORNO'),
-('2025-04-07', '15:15:00', 4, 4, 'AGENDADO', NULL, 'CONSULTA'),
-('2025-04-07', '16:45:00', 5, 5, 'CANCELADO', NULL, 'PERICIA'),
-('2025-04-08', '08:00:00', 1, 3, 'AGENDADO', NULL, 'EXAME'),
-('2025-04-09', '10:00:00', 2, 5, 'ENCERRADO', NULL, 'CONSULTA'),
-('2025-04-10', '14:30:00', 3, 1, 'CHEGADA', NULL, 'RETORNO'),
-('2025-04-10', '16:00:00', 4, 2, 'AGENDADO', NULL, 'PERICIA'),
-('2025-04-11', '11:15:00', 5, 3, 'AGENDADO', NULL, 'EXAME');
-
+('2025-04-05', '09:00:00', 1, 1, 'CHEGADA', NULL, 'CONSULTA', 'Paciente queixa-se de dores de cabeça.'),
+('2025-04-06', '10:30:00', 2, 2, 'AGENDADO', NULL, 'EXAME', 'Exame de sangue de rotina.'),
+('2025-04-06', '13:00:00', 3, 3, 'ENCERRADO', NULL, 'RETORNO', 'Retorno para avaliação de tratamento.'),
+('2025-04-07', '15:15:00', 4, 4, 'AGENDADO', NULL, 'CONSULTA', 'Consulta dermatológica inicial.'),
+('2025-04-07', '16:45:00', 5, 5, 'CANCELADO', NULL, 'PERICIA', 'Perícia médica agendada.'),
+('2025-04-08', '08:00:00', 1, 3, 'AGENDADO', NULL, 'EXAME', 'Eletrocardiograma solicitado.'),
+('2025-04-09', '10:00:00', 2, 5, 'ENCERRADO', NULL, 'CONSULTA', 'Consulta pediátrica de rotina.'),
+('2025-04-10', '14:30:00', 3, 1, 'CHEGADA', NULL, 'RETORNO', 'Retorno para mostrar resultados de exames.'),
+('2025-04-10', '16:00:00', 4, 2, 'AGENDADO', NULL, 'PERICIA', 'Avaliação para fins de perícia.'),
+('2025-04-11', '11:15:00', 5, 3, 'AGENDADO', NULL, 'EXAME', 'Tomografia computadorizada.');
 
 -- Inserções na tabela 'prontuario' corrigidas para corresponder à entidade Java
 INSERT INTO prontuario (atendimento_id, descricao, prescricao, observacao) 
