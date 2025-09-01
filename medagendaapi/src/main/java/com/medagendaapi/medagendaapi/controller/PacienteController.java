@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.medagendaapi.medagendaapi.model.Anamnese;
 import com.medagendaapi.medagendaapi.model.Paciente;
 import com.medagendaapi.medagendaapi.service.PacienteService;
 
@@ -63,6 +65,19 @@ public class PacienteController implements ICrudController<Paciente> {
     public ResponseEntity<Paciente> update(@RequestBody Paciente objeto) {
         Paciente registro = servico.save(objeto);
         return ResponseEntity.ok(registro);
+    }
+
+    @GetMapping("/anamnese/{id}")
+    public ResponseEntity<Anamnese> fichaDoPaciente(@PathVariable Long id){
+        Paciente registro = servico.get(id);
+        
+        if (registro != null){
+            System.out.println(registro.getAnamnese().getObservacao());
+            Anamnese anamnese = registro.getAnamnese();
+            return ResponseEntity.ok(anamnese);
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
     
 }

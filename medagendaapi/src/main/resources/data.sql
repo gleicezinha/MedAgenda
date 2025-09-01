@@ -54,6 +54,23 @@ VALUES
 ('Paciente Um', '66677788899', 'paciente1@email.com', 'SP', 'Rua Flores, 123', 'Centro', '01001-000', '(11) 98888-8888', '(11) 97777-0001', '1990-01-15', 'A_POSITIVO', 'F'),
 ('Paciente Dois', '77788899900', 'paciente2@email.com', 'RJ', 'Av. Brasil, 456', 'Glória', '20021-340', '(21) 98888-8888', '(21) 97777-0002', '1985-06-20', 'O_NEGATIVO', 'M');
 
+-- Anamneses para os pacientes já cadastrados
+INSERT INTO anamnese 
+(paciente_id, tem_doenca_cronica, qual_doenca_cronica, 
+ fez_cirurgia, qual_cirurgia, 
+ toma_medicacao, qual_medicacao, 
+ tem_deficiencia_fisica, qual_deficiencia, 
+ tem_doenca_neurologica, qual_doenca_neurologica, 
+ observacao)
+VALUES
+(1, TRUE, 'Hipertensão', FALSE, NULL, TRUE, 'Losartana', FALSE, NULL, FALSE, NULL, 'Paciente hipertenso controlado.'),
+(2, FALSE, NULL, TRUE, 'Apendicectomia', FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Paciente sem queixas atuais.'),
+(3, FALSE, NULL, FALSE, NULL, FALSE, NULL, TRUE, 'Visão reduzida', FALSE, NULL, 'Paciente utiliza óculos.'),
+(4, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, TRUE, 'Epilepsia controlada', 'Paciente faz acompanhamento neurológico.'),
+(5, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Sem histórico clínico relevante.'),
+(6, TRUE, 'Diabetes Tipo 2', FALSE, NULL, TRUE, 'Metformina', FALSE, NULL, FALSE, NULL, 'Paciente em tratamento para diabetes.'),
+(7, FALSE, NULL, TRUE, 'Cirurgia de hérnia', FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Pós-cirurgia sem complicações.');
+
 INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento)
 VALUES
 ('2025-04-05', '09:00:00', 1, 1, 'CHEGADA', NULL, 'CONSULTA'),
