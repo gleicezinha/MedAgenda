@@ -2,6 +2,8 @@ package com.medagendaapi.medagendaapi.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.medagendaapi.medagendaapi.model.EPapel;
@@ -65,6 +67,11 @@ public class PacienteService implements ICrudService<Paciente>{
         }
         Paciente registro = repo.save(objeto);
         return registro;
+    }
+
+    public Page<Paciente> getPaginado(String termoBusca, Pageable page){
+        Page<Paciente> registros = repo.buscaPaginada(termoBusca, page);
+        return registros;
     }
     
 }
