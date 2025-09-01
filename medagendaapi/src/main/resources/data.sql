@@ -85,57 +85,18 @@ VALUES
 ('2025-04-11', '11:15:00', 5, 3, 'AGENDADO', NULL, 'EXAME');
 
 
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, 
- tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
+-- Inserções na tabela 'prontuario' corrigidas para corresponder à entidade Java
+INSERT INTO prontuario (atendimento_id, descricao, prescricao, observacao) 
 VALUES 
-(1, 'Dores de cabeça frequentes.', 'Paciente relatou cefaleias tensionais. Sem sinais de enxaqueca.', 'Prescrito paracetamol e hidratação.', TRUE, 'Dipirona', TRUE, 'Paracetamol', FALSE, NULL),
-(2, 'Check-up anual.', 'Exames laboratoriais solicitados.', 'Nenhuma prescrição. Aguardando resultados.', FALSE, NULL, FALSE, NULL, FALSE, NULL),
-(3, 'Retorno após tratamento de gastrite.', 'Paciente melhorou após uso de omeprazol.', 'Manter alimentação leve por 30 dias.', FALSE, NULL, TRUE, 'Omeprazol', FALSE, NULL),
-(4, 'Tosse persistente há 10 dias.', 'Suspeita de bronquite leve. Ausência de febre.', 'Prescrito xarope expectorante.', TRUE, 'Lactose', FALSE, NULL, FALSE, NULL),
-(5, 'Consulta cancelada pelo paciente.', 'Atendimento não realizado.', NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
+(1, 'Paciente relatou cefaleias tensionais. Sem sinais de enxaqueca.', 'Prescrito paracetamol e hidratação.', 'Dores de cabeça frequentes.'),
+(2, 'Exames laboratoriais solicitados.', 'Nenhuma prescrição. Aguardando resultados.', 'Check-up anual.'),
+(3, 'Paciente melhorou após uso de omeprazol.', 'Manter alimentação leve por 30 dias.', 'Retorno após tratamento de gastrite.'),
+(4, 'Suspeita de bronquite leve. Ausência de febre.', 'Prescrito xarope expectorante.', 'Tosse persistente há 10 dias.'),
+(5, 'Atendimento não realizado.', NULL, 'Consulta cancelada pelo paciente.'),
+(6, 'Paciente assintomático. Sem histórico clínico relevante.', 'Nenhuma prescrição.', 'Exame de rotina solicitado pela escola.'),
+(7, 'Exame de raio-X não identificou fraturas.', 'Recomendado repouso e analgésico.', 'Dores nas costas após queda.'),
+(8, 'Recuperação dentro do esperado. Sem dor.', 'Iniciar fisioterapia.', 'Revisão pós cirurgia de joelho.'),
+(9, 'Paciente saudável, sem restrições.', 'Laudo emitido: Apto para trabalho.', 'Avaliação médica solicitada pela empresa.'),
+(10, 'Coleta de sangue, ECG e raio-X realizados.', 'Aguardar resultados laboratoriais.', 'Exames pré-operatórios.');
 INSERT INTO atendente (nome_completo, cpf, telefone, especialidade_atendente, email, cep, bairro, estado, endereco)
 VALUES ('Ana Beatriz da Silva', '123.456.789-00', '(11) 91234-5678', 'SECRETARIO', 'ana.silva@example.com', '01234-567', 'Centro', 'SP', 'Rua das Flores, 123');
-
--- Prontuário para atendimento 6
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(6, 'Exame de rotina solicitado pela escola.', 'Paciente assintomático. Sem histórico clínico relevante.', 'Nenhuma prescrição.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 7
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(7, 'Dores nas costas após queda.', 'Exame de raio-X não identificou fraturas.', 'Recomendado repouso e analgésico.', FALSE, NULL, TRUE, 'Ibuprofeno', FALSE, NULL);
-
--- Prontuário para atendimento 8
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(8, 'Revisão pós cirurgia de joelho.', 'Recuperação dentro do esperado. Sem dor.', 'Iniciar fisioterapia.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 9
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(9, 'Avaliação médica solicitada pela empresa.', 'Paciente saudável, sem restrições.', 'Laudo emitido: Apto para trabalho.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 10
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(10, 'Exames pré-operatórios.', 'Coleta de sangue, ECG e raio-X realizados.', 'Aguardar resultados laboratoriais.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
