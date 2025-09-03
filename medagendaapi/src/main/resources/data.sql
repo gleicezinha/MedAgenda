@@ -97,5 +97,6 @@ VALUES
 (8, 'Recuperação dentro do esperado. Sem dor.', 'Iniciar fisioterapia.', 'Revisão pós cirurgia de joelho.'),
 (9, 'Paciente saudável, sem restrições.', 'Laudo emitido: Apto para trabalho.', 'Avaliação médica solicitada pela empresa.'),
 (10, 'Coleta de sangue, ECG e raio-X realizados.', 'Aguardar resultados laboratoriais.', 'Exames pré-operatórios.');
+
 INSERT INTO atendente (nome_completo, cpf, telefone, especialidade_atendente, email, cep, bairro, estado, endereco)
 VALUES ('Ana Beatriz da Silva', '123.456.789-00', '(11) 91234-5678', 'SECRETARIO', 'ana.silva@example.com', '01234-567', 'Centro', 'SP', 'Rua das Flores, 123');
