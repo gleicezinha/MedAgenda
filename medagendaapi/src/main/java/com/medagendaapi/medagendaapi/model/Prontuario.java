@@ -16,32 +16,16 @@ public class Prontuario {
     private Long id;
 
     @Column(length = 2000)
-    private String problemaRelatado;
-
-    @Column(length = 2000)
     private String descricao;
 
     @Column(length = 2000)
     private String prescricao;
 
+    @Column(length = 2000)
+    private String observacao;
+
     @OneToOne(optional = false)
     private Atendimento atendimento;
-
-    private boolean temAlergia;
-
-    private String qualAlergia;
-
-    private boolean temRemedio;
-
-    private String qualRemedio;
-
-    private boolean temDoencaCognitiva;
-
-    private String qualDoencaCognitiva;
-
-    public void setQualDoencaCognitiva(String qualDoencaCognitiva) {
-        this.qualDoencaCognitiva = qualDoencaCognitiva;
-    }
 
     public Long getId() {
         return id;
@@ -49,22 +33,6 @@ public class Prontuario {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Atendimento getAtendimento() {
-        return atendimento;
-    }
-
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
-    }
-
-    public String getProblemaRelatado() {
-        return problemaRelatado;
-    }
-
-    public void setProblemaRelatado(String problemaRelatado) {
-        this.problemaRelatado = problemaRelatado;
     }
 
     public String getDescricao() {
@@ -83,48 +51,20 @@ public class Prontuario {
         this.prescricao = prescricao;
     }
 
-    public boolean isTemAlergia() {
-        return temAlergia;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setTemAlergia(boolean temAlergia) {
-        this.temAlergia = temAlergia;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
-    public String getQualAlergia() {
-        return qualAlergia;
+    public Atendimento getAtendimento() {
+        return atendimento;
     }
 
-    public void setQualAlergia(String qualAlergia) {
-        this.qualAlergia = qualAlergia;
-    }
-
-    public boolean isTemRemedio() {
-        return temRemedio;
-    }
-
-    public void setTemRemedio(boolean temRemedio) {
-        this.temRemedio = temRemedio;
-    }
-
-    public String getQualRemedio() {
-        return qualRemedio;
-    }
-
-    public void setQualRemedio(String qualRemedio) {
-        this.qualRemedio = qualRemedio;
-    }
-
-    public boolean isTemDoencaCognitiva() {
-        return temDoencaCognitiva;
-    }
-
-    public void setTemDoencaCognitiva(boolean temDoencaCognitiva) {
-        this.temDoencaCognitiva = temDoencaCognitiva;
-    }
-
-    public String getQualDoencaCognitiva() {
-        return qualDoencaCognitiva;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
 
 }

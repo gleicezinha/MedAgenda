@@ -46,6 +46,9 @@ public class Atendimento implements Serializable {
     @Enumerated(EnumType.STRING)
     private EAtendimento tipoDeAtendimento;
 
+    @Column(length = 2000)
+    private String problemaRelatado;
+
     private Long idPai;
 
     public Long getId() {
@@ -102,6 +105,14 @@ public class Atendimento implements Serializable {
 
     public void setTipoDeAtendimento(EAtendimento tipoDeAtendimento) {
         this.tipoDeAtendimento = tipoDeAtendimento;
+    }
+
+    public String getProblemaRelatado() {
+        return problemaRelatado;
+    }
+
+    public void setProblemaRelatado(String problemaRelatado) {
+        this.problemaRelatado = problemaRelatado;
     }
 
     public Long getIdPai() {

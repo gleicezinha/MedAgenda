@@ -2,13 +2,19 @@ package com.medagendaapi.medagendaapi.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Paciente implements Serializable{
@@ -38,7 +44,11 @@ public class Paciente implements Serializable{
     private String telefone;
 
     private String telefoneEmergencia;
-    
+
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Anamnese anamnese;
+
     @Column(nullable = false)
     private LocalDate dataNascimento;
 
@@ -151,6 +161,14 @@ public class Paciente implements Serializable{
 
     public void setSexo(ESexo sexo) {
         this.sexo = sexo;
+    }
+
+    public Anamnese getAnamnese() {
+        return anamnese;
+    }
+
+    public void setAnamnese(Anamnese anamnese) {
+        this.anamnese = anamnese;
     }
 
 }

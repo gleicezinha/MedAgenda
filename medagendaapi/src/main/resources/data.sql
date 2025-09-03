@@ -54,71 +54,49 @@ VALUES
 ('Paciente Um', '66677788899', 'paciente1@email.com', 'SP', 'Rua Flores, 123', 'Centro', '01001-000', '(11) 98888-8888', '(11) 97777-0001', '1990-01-15', 'A_POSITIVO', 'F'),
 ('Paciente Dois', '77788899900', 'paciente2@email.com', 'RJ', 'Av. Brasil, 456', 'Glória', '20021-340', '(21) 98888-8888', '(21) 97777-0002', '1985-06-20', 'O_NEGATIVO', 'M');
 
-INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento)
+-- Anamneses para os pacientes já cadastrados
+INSERT INTO anamnese 
+(paciente_id, tem_doenca_cronica, qual_doenca_cronica, 
+ fez_cirurgia, qual_cirurgia, 
+ toma_medicacao, qual_medicacao, 
+ tem_deficiencia_fisica, qual_deficiencia, 
+ tem_doenca_neurologica, qual_doenca_neurologica, 
+ observacao)
 VALUES
-('2025-04-05', '09:00:00', 1, 1, 'CHEGADA', NULL, 'CONSULTA'),
-('2025-04-06', '10:30:00', 2, 2, 'AGENDADO', NULL, 'EXAME'),
-('2025-04-06', '13:00:00', 3, 3, 'ENCERRADO', NULL, 'RETORNO'),
-('2025-04-07', '15:15:00', 4, 4, 'AGENDADO', NULL, 'CONSULTA'),
-('2025-04-07', '16:45:00', 5, 5, 'CANCELADO', NULL, 'PERICIA'),
-('2025-04-08', '08:00:00', 1, 3, 'AGENDADO', NULL, 'EXAME'),
-('2025-04-09', '10:00:00', 2, 5, 'ENCERRADO', NULL, 'CONSULTA'),
-('2025-04-10', '14:30:00', 3, 1, 'CHEGADA', NULL, 'RETORNO'),
-('2025-04-10', '16:00:00', 4, 2, 'AGENDADO', NULL, 'PERICIA'),
-('2025-04-11', '11:15:00', 5, 3, 'AGENDADO', NULL, 'EXAME');
+(1, TRUE, 'Hipertensão', FALSE, NULL, TRUE, 'Losartana', FALSE, NULL, FALSE, NULL, 'Paciente hipertenso controlado.'),
+(2, FALSE, NULL, TRUE, 'Apendicectomia', FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Paciente sem queixas atuais.'),
+(3, FALSE, NULL, FALSE, NULL, FALSE, NULL, TRUE, 'Visão reduzida', FALSE, NULL, 'Paciente utiliza óculos.'),
+(4, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, TRUE, 'Epilepsia controlada', 'Paciente faz acompanhamento neurológico.'),
+(5, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Sem histórico clínico relevante.'),
+(6, TRUE, 'Diabetes Tipo 2', FALSE, NULL, TRUE, 'Metformina', FALSE, NULL, FALSE, NULL, 'Paciente em tratamento para diabetes.'),
+(7, FALSE, NULL, TRUE, 'Cirurgia de hérnia', FALSE, NULL, FALSE, NULL, FALSE, NULL, 'Pós-cirurgia sem complicações.');
 
+INSERT INTO atendimento (data_de_atendimento, horario_de_atendimento, medico_id, paciente_id, status, id_pai, tipo_de_atendimento, problema_relatado)
+VALUES
+('2025-04-05', '09:00:00', 1, 1, 'CHEGADA', NULL, 'CONSULTA', 'Paciente queixa-se de dores de cabeça.'),
+('2025-04-06', '10:30:00', 2, 2, 'AGENDADO', NULL, 'EXAME', 'Exame de sangue de rotina.'),
+('2025-04-06', '13:00:00', 3, 3, 'ENCERRADO', NULL, 'RETORNO', 'Retorno para avaliação de tratamento.'),
+('2025-04-07', '15:15:00', 4, 4, 'AGENDADO', NULL, 'CONSULTA', 'Consulta dermatológica inicial.'),
+('2025-04-07', '16:45:00', 5, 5, 'CANCELADO', NULL, 'PERICIA', 'Perícia médica agendada.'),
+('2025-04-08', '08:00:00', 1, 3, 'AGENDADO', NULL, 'EXAME', 'Eletrocardiograma solicitado.'),
+('2025-04-09', '10:00:00', 2, 5, 'ENCERRADO', NULL, 'CONSULTA', 'Consulta pediátrica de rotina.'),
+('2025-04-10', '14:30:00', 3, 1, 'CHEGADA', NULL, 'RETORNO', 'Retorno para mostrar resultados de exames.'),
+('2025-04-10', '16:00:00', 4, 2, 'AGENDADO', NULL, 'PERICIA', 'Avaliação para fins de perícia.'),
+('2025-04-11', '11:15:00', 5, 3, 'AGENDADO', NULL, 'EXAME', 'Tomografia computadorizada.');
 
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, 
- tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
+-- Inserções na tabela 'prontuario' corrigidas para corresponder à entidade Java
+INSERT INTO prontuario (atendimento_id, descricao, prescricao, observacao) 
 VALUES 
-(1, 'Dores de cabeça frequentes.', 'Paciente relatou cefaleias tensionais. Sem sinais de enxaqueca.', 'Prescrito paracetamol e hidratação.', TRUE, 'Dipirona', TRUE, 'Paracetamol', FALSE, NULL),
-(2, 'Check-up anual.', 'Exames laboratoriais solicitados.', 'Nenhuma prescrição. Aguardando resultados.', FALSE, NULL, FALSE, NULL, FALSE, NULL),
-(3, 'Retorno após tratamento de gastrite.', 'Paciente melhorou após uso de omeprazol.', 'Manter alimentação leve por 30 dias.', FALSE, NULL, TRUE, 'Omeprazol', FALSE, NULL),
-(4, 'Tosse persistente há 10 dias.', 'Suspeita de bronquite leve. Ausência de febre.', 'Prescrito xarope expectorante.', TRUE, 'Lactose', FALSE, NULL, FALSE, NULL),
-(5, 'Consulta cancelada pelo paciente.', 'Atendimento não realizado.', NULL, FALSE, NULL, FALSE, NULL, FALSE, NULL);
+(1, 'Paciente relatou cefaleias tensionais. Sem sinais de enxaqueca.', 'Prescrito paracetamol e hidratação.', 'Dores de cabeça frequentes.'),
+(2, 'Exames laboratoriais solicitados.', 'Nenhuma prescrição. Aguardando resultados.', 'Check-up anual.'),
+(3, 'Paciente melhorou após uso de omeprazol.', 'Manter alimentação leve por 30 dias.', 'Retorno após tratamento de gastrite.'),
+(4, 'Suspeita de bronquite leve. Ausência de febre.', 'Prescrito xarope expectorante.', 'Tosse persistente há 10 dias.'),
+(5, 'Atendimento não realizado.', NULL, 'Consulta cancelada pelo paciente.'),
+(6, 'Paciente assintomático. Sem histórico clínico relevante.', 'Nenhuma prescrição.', 'Exame de rotina solicitado pela escola.'),
+(7, 'Exame de raio-X não identificou fraturas.', 'Recomendado repouso e analgésico.', 'Dores nas costas após queda.'),
+(8, 'Recuperação dentro do esperado. Sem dor.', 'Iniciar fisioterapia.', 'Revisão pós cirurgia de joelho.'),
+(9, 'Paciente saudável, sem restrições.', 'Laudo emitido: Apto para trabalho.', 'Avaliação médica solicitada pela empresa.'),
+(10, 'Coleta de sangue, ECG e raio-X realizados.', 'Aguardar resultados laboratoriais.', 'Exames pré-operatórios.');
 
 INSERT INTO atendente (nome_completo, cpf, telefone, especialidade_atendente, email, cep, bairro, estado, endereco)
 VALUES ('Ana Beatriz da Silva', '123.456.789-00', '(11) 91234-5678', 'SECRETARIO', 'ana.silva@example.com', '01234-567', 'Centro', 'SP', 'Rua das Flores, 123');
-
--- Prontuário para atendimento 6
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(6, 'Exame de rotina solicitado pela escola.', 'Paciente assintomático. Sem histórico clínico relevante.', 'Nenhuma prescrição.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 7
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(7, 'Dores nas costas após queda.', 'Exame de raio-X não identificou fraturas.', 'Recomendado repouso e analgésico.', FALSE, NULL, TRUE, 'Ibuprofeno', FALSE, NULL);
-
--- Prontuário para atendimento 8
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(8, 'Revisão pós cirurgia de joelho.', 'Recuperação dentro do esperado. Sem dor.', 'Iniciar fisioterapia.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 9
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(9, 'Avaliação médica solicitada pela empresa.', 'Paciente saudável, sem restrições.', 'Laudo emitido: Apto para trabalho.', FALSE, NULL, FALSE, NULL, FALSE, NULL);
-
--- Prontuário para atendimento 10
-INSERT INTO prontuario 
-(atendimento_id, problema_relatado, descricao, prescricao, 
- tem_alergia, qual_alergia, tem_remedio, qual_remedio, 
- tem_doenca_cognitiva, qual_doenca_cognitiva) 
-VALUES 
-(10, 'Exames pré-operatórios.', 'Coleta de sangue, ECG e raio-X realizados.', 'Aguardar resultados laboratoriais.', FALSE, NULL, FALSE, NULL, FALSE, NULL);

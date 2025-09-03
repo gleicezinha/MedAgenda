@@ -2,6 +2,12 @@ package com.medagendaapi.medagendaapi.controller;
 
 import java.util.List;
 
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +48,21 @@ public class AtendimentoController implements ICrudController<Atendimento> {
     @GetMapping("/consultar-todos")
     public ResponseEntity<List<Atendimento>> get(@RequestParam(required = false) String termoBusca) {
         List<Atendimento> registros = servico.get(termoBusca);
+        return ResponseEntity.ok(registros);
+    }
+
+    @GetMapping("/consultar-paginado")
+    public ResponseEntity<Page<Atendimento>> getPaginado(
+        @RequestParam(required = false) String termoBusca,
+        @RequestParam(required = false) String data,
+        @RequestParam(required = false) String tipoDeAtendimento,
+        @SortDefaults({
+            @SortDefault(sort = "dataDeAtendimento", direction = Sort.Direction.DESC)
+        })
+        @ParameterObject
+        Pageable page
+    ){
+        Page<Atendimento> registros = servico.get(termoBusca, data, tipoDeAtendimento, page);
         return ResponseEntity.ok(registros);
     }
 

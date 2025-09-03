@@ -1,6 +1,8 @@
 package com.medagendaapi.medagendaapi.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.medagendaapi.medagendaapi.model.Atendente;
 import com.medagendaapi.medagendaapi.model.EPapel;
@@ -47,6 +49,11 @@ public class AtendenteService implements ICrudService<Atendente> {
         }
         Atendente registro = repo.save(objeto);
         return registro;
+    }
+
+    public Page<Atendente> buscaPaginada(String termoBusca, Pageable page){
+        Page<Atendente> registros = repo.buscaPaginado(termoBusca, page);
+        return registros;
     }
             
 }
