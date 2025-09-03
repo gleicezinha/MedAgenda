@@ -2,6 +2,9 @@ package com.medagendaapi.medagendaapi.controller;
 
 import java.util.List;
 
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.medagendaapi.medagendaapi.model.Medico;
 import com.medagendaapi.medagendaapi.service.MedicoService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -60,5 +65,14 @@ public class MedicoController implements ICrudController<Medico> {
         Medico registro = servico.save(objeto);
         return ResponseEntity.ok(registro);
     }
+
+    @GetMapping("/consultar-paginado")
+    public ResponseEntity<Page<Medico>> getPaginada(
+        @RequestParam(required = false) String termoBusca,
+        @ParameterObject Pageable page) {
+        Page<Medico> registros = servico.buscaPaginada(termoBusca, page);
+        return ResponseEntity.ok(registros);
+    }
+    
     
 }

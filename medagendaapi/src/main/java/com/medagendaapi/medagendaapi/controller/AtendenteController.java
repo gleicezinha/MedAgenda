@@ -64,7 +64,7 @@ public class AtendenteController implements ICrudController<Atendente> {
         return ResponseEntity.ok(registro);
     }
 
-    @GetMapping("/busca-paginada")
+    @GetMapping("/consultar-paginado")
     public ResponseEntity<Page<Atendente>> getPaginada(
         @RequestParam(required = false)String termoBusca,
         @ParameterObject Pageable page){
