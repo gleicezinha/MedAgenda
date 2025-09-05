@@ -16,7 +16,7 @@ public class FiltroCors {
         var config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.setAllowedOrigins(Arrays.asList(
-            "http://localhost:4200"));
+            "http://localhost:4200",  "https://sefazapp.onrender.com"));
         config.setAllowedMethods(Arrays.asList("*"));
         config.setAllowedHeaders(Arrays.asList("*"));
         var source = new UrlBasedCorsConfigurationSource();
