@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medagendaapi.medagendaapi.config.TokenService;
+import com.medagendaapi.medagendaapi.controller.dto.AtendimentoDto;
+import com.medagendaapi.medagendaapi.controller.mapper.AtendimentoMapper;
 import com.medagendaapi.medagendaapi.model.Atendimento;
 import com.medagendaapi.medagendaapi.model.EPapel;
 import com.medagendaapi.medagendaapi.model.EStatus;
@@ -27,14 +29,16 @@ import com.medagendaapi.medagendaapi.service.AtendimentoService;
 
 @RestController
 @RequestMapping("/atendimento")
-public class AtendimentoController implements ICrudController<Atendimento> {
+public class AtendimentoController implements ICrudController<AtendimentoDto> {
 
     private final AtendimentoService servico;
     private final TokenService tokenService;
+    private final AtendimentoMapper mapper;
 
-    public AtendimentoController(AtendimentoService servico, TokenService tokenService){
+    public AtendimentoController(AtendimentoService servico, TokenService tokenService, AtendimentoMapper mapper){
         this.servico = servico;
         this.tokenService = tokenService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -68,22 +72,26 @@ public class AtendimentoController implements ICrudController<Atendimento> {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Atendimento> get(@PathVariable Long id) {
+    public ResponseEntity<AtendimentoDto> get(@PathVariable Long id) {
         Atendimento registro = servico.get(id);
-        return ResponseEntity.ok(registro);
+        if (registro == null){
+            return ResponseEntity.notFound().build();
+        }
+        var dto = mapper.toDto(registro);
+        return ResponseEntity.ok(dto);
     }
 
     @Override
     @PostMapping("/inserir")
-    public ResponseEntity<Atendimento> insert(@RequestBody Atendimento objeto) {
-        Atendimento registro = null;
+    public ResponseEntity<AtendimentoDto> insert(@RequestBody AtendimentoDto objeto) {
+        Atendimento registro = mapper.toEntity(objeto);
         String papel = tokenService.PapelDoUsuarioAutenticado();
         if (papel == EPapel.ROLE_PACIENTE.toString()){
-            objeto.setStatus(EStatus.SOLICITADO);
+            registro.setStatus(EStatus.SOLICITADO);
         }
-        registro = servico.save(objeto);
-        
-        return ResponseEntity.ok(registro);
+        registro = servico.save(registro);
+        var dto = mapper.toDto(registro);
+        return ResponseEntity.ok(dto);
     }
 
     // @PostMapping("/solicitar")
@@ -98,9 +106,11 @@ public class AtendimentoController implements ICrudController<Atendimento> {
 
     @Override
     @PutMapping("/atualizar")
-    public ResponseEntity<?> update(@RequestBody Atendimento objeto) {
-        Atendimento registro = servico.save(objeto);
-        return ResponseEntity.ok(registro);
+    public ResponseEntity<AtendimentoDto> update(@RequestBody AtendimentoDto objeto) {
+        Atendimento registro = mapper.toEntity(objeto);
+        registro = servico.save(registro);
+        var dto = mapper.toDto(registro);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/status/{id}")
